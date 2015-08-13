@@ -1,9 +1,0 @@
-## Ignoring files in git
-Create file ~/.gitignore_global
-*.pyc
-*.pyo
-*.log
-*~
-
-Tell git to ignore all matching files:
-git config --global core.excludesfile ~/.gitignore_global
