@@ -10,19 +10,22 @@ Jennifer's cheat sheet for Python basic syntax and handy tips.
 - Dictionaries
 - Modules, namespaces and scripts
 - Text file I/O
-- Date and time
+- Handy modules - date and time, random number
 - Sorting
 - IPython features
 - Editor configuration
 - Conventions and best practices
 
+Each section of this cheatsheet can be copy/pasted into ipython and run
+separately in an interactive session.
+
+Many of these code snippets are pilfered / adapted from Google's Python Class
+(https://developers.google.com/edu/python/), the Python Tutorial
+(https://docs.python.org/2/tutorial/) and codecademy.com.
+
 A triple-quoted comment at the beginning of a module (.py)
 file or function is automatically used as the documentation
 string.
-
-Many of these code snippets are pilfered from Google's Python Class 
-(https://developers.google.com/edu/python/), the Python Tutorial
-(https://docs.python.org/2/tutorial/) and codecademy.com.
 '''
 
 print("\nWelcome to Jennifer's Python basics cheat sheet!".upper())
@@ -40,7 +43,7 @@ heading('Variables and basic operations')
 
 print('''
 Create a variable by assigning it a value, e.g.,
-x = 10  
+x = 10
 No need to declare it as a variable of a certain type.
 Python assigns it a type based on the value.
 
@@ -56,13 +59,13 @@ Boolean operators: and, or, not
 ''')
 
 # Basic math operators
-x_addition = 72 + 23
-x_subtraction = 108 - 204
-x_multiplication = 108 * 0.5
-x_division = 108 / 9
-x_power = 2 ** 3 # Exponentiation
-x_modulo = 4 % 3 # Modulus
-x_integer_division = 6 // 5 # Integer (floor) division
+x = 72 + 23
+x = 108 - 204
+x = 108 * 0.5
+x = 108 / 9
+x = 2 ** 3 # Exponentiation
+x = 4 % 3 # Modulus
+x = 6 // 5 # Integer (floor) division
 
 # Assignment operators
 x1 = 10
@@ -79,16 +82,16 @@ bool2 = False
 x1 = 10
 x2 = 3
 bool1 = x1 == x2
-bool2 = x1 != x2
-bool3 = x1 < x2
-bool4 = x1 <= x2
-bool5 = x1 > x2
-bool6 = x1 >= x2
+bool1 = x1 != x2
+bool1 = x1 < x2
+bool1 = x1 <= x2
+bool1 = x1 > x2
+bool1 = x1 >= x2
 
 # Boolean operators
-bool_one = (2 <= 2) and "Alpha" == "Bravo"
-bool_two = (1<2) or (2<1)
-bool_four = not (10>100)
+bool1 = (2 <= 2) and "Alpha" == "Bravo"
+bool1 = (1<2) or (2<1)
+bool1 = not (10>100)
 
 # Type
 print type(43) # int
@@ -106,7 +109,24 @@ str1 = "Cats say 'meow'."
 str2 = 'Dogs say "woof".'
 
 # Escape characters
-str3 = 'This isn\'t flying,\nthis is falling with style!'
+str3 = 'Well... my sister\'s a ship.  We had a complicated childhood.'
+
+# Multi-line strings
+# --- With parentheses:
+#     Doesn't include newlines unless added with \n
+long1 = ("I can't keep track of her when she's *not* incorporeally possessing "
+         "a space ship; don't look at me.")
+# --- With triple quotation marks:
+#     Include \ at end of line to exclude new line
+long2 = """\
+They say the snow on the roof is too heavy. \
+They say the ceiling will cave in. \
+His brains are in terrible danger.
+Too... Much... Hair!
+"""
+
+print(long1)
+print(long2)
 
 # String methods
 parrot = "Norwegian Blue"
@@ -116,8 +136,8 @@ print(parrot.upper())
 pi = 3.14159
 print(str(pi)) # Convert to string
 s = str1 + " " + str2 # Concatenation
-s_exclaim = s.replace('.','!') # Replace substring
 print(s)
+s_exclaim = s.replace('.','!') # Replace substring
 print(s_exclaim)
 s_rep = 'kittens! ' * 3 # Repeats the string 'kittens! ' 3 times
 print(s_rep)
@@ -125,10 +145,10 @@ print(s_rep)
 # Indexing and slicing strings
 '''
 Indices start at 0 and count up, or from the end of the
-string at -1 and count down. 
+string at -1 and count down.
 
 Slicing: Extracting a range of indices (e.g., 1:4)
-The slice n1:n2 is *inclusive* of n1 and *exclusive* of n2, 
+The slice n1:n2 is *inclusive* of n1 and *exclusive* of n2,
 i.e. 1:4 gives elements 1,2,3.
 
 There is no separate character type.  A character is a string
@@ -151,23 +171,7 @@ print(s[0]) # 'C'
 #s[0] = 'B' # Raises error
 s = 'Bats' # Works
 
-# Multi-line strings
-# --- With triple quotation marks:
-#     Include \ at end of line to exclude new line
-long1 = """\
-Soft kitty, \
-warm kitty.
-Little ball of fur."""
-# --- With parentheses:
-#     Doesn't include newlines unless added with \n
-long2 = ("Happy kitty, "
-      "sleepy kitty.\n"
-      "Purr, purr, purr."
-     )
-print(long1)
-print(long2)
-     
-# Formatting string output to console
+# Formatting strings
 s1 = 'Cats'
 s2 = 'world'
 s3 = ("%s rule the %s.  Pi is %.2f to 2 digits." % (s1, s2, pi))
@@ -212,10 +216,12 @@ print(len(a)) # Length
 
 # Membership testing
 '''The "in" statement returns True if an element is in a list,
-False if not'''
-cats = ['calico', 'tabby', 'tuxedo']
-test1 = 'tabby' in cats # True
-test2 = 'siamese' in cats # False
+False if not.  And vice versa for "not in" statement '''
+firefly = ['Mal', 'Wash', 'Zoe', 'Jayne', 'Kaylee', 'Inara', 'Simon',
+    'River', 'Book']
+test1 = 'Kaylee' in firefly # True
+test2 = 'Sheldon' in firefly # False
+test3 = 'Sheldon' not in firefly # True
 
 # Deleting
 # --- Use the del command to delete individual elements,
@@ -227,7 +233,7 @@ del a[:] # Now a is []
 del a # Now a no longer exists
 
 # Defining numeric lists
-x1 = range(5) # 0, 1, 2, 3, 4   
+x1 = range(5) # 0, 1, 2, 3, 4
 x2 = range(0, 10) # 0, 1, 2, 3, 4
 x3 = range(0,10,2) # 0, 2, 4, 6, 8
 
@@ -240,10 +246,10 @@ print(fruit)
 
 # Zip function for iterating over multiple lists
 '''
-zip will create pairs of elements when passed two lists, and will stop at the end of the shorter list. zip can handle three or more lists as well.
+zip will create pairs of elements when passed two lists, and will stop
+at the end of the shorter list. zip can handle three or more lists as well.
 '''
-
-list_a = [3, 9, 17, 15, 19]
+list_a = [3, 1, 17, 15, 19]
 list_b = [2, 4, 8, 10, 30, 40, 50, 60, 70, 80, 90]
 
 for a, b in zip(list_a, list_b):
@@ -286,7 +292,7 @@ heading('Control flow')
 
 # If statements
 # -------------
-s = 'Hello world'
+s = 'Curse your sudden but inevitable betrayal!'
 if len(s) > 10:
     print('Long string')
 elif len(s) < 5:
@@ -295,12 +301,12 @@ else:
     print('Medium string')
 
 mylist = ['larry', 'curly', 'moe']
-if 'curly' in mylist: 
+if 'curly' in mylist:
     print('Yay!')
 
 # Any non-zero number tests as True
 # Any list of non-zero length tests as True
-# 0, None and [] test as False    
+# 0, None and [] test as False
 x = 10
 if x: print('Yes')
 x = []
@@ -316,7 +322,7 @@ animals = ["hamster", "rabbit", "cat", "gerbil"]
 print("--- Loop over items:")
 for item in animals:
 	print("Hello " + item)
-	
+
 print("--- Loop over indices:")
 for i in range(len(animals)):
     print(str(i) + ") " + animals[i])
@@ -351,7 +357,7 @@ print(series)
 ''' Additional control flow statements:
 break - Breaks out of smallest enclosing for or while loop
 continue - Continues with next iteration of loop
-pass - Does nothing.  Use when syntax requires a statement but 
+pass - Does nothing.  Use when syntax requires a statement but
        no action is needed.
 '''
 
@@ -365,7 +371,7 @@ heading('Functions')
 def shouting(s):
     '''
     Shouts a string in upper case with exclamation points!
-    
+
     A triple-quoted comment at the beginning of the function
     (if present) is automatically used as the docstring.
     Convention: First line of docstring is a concise summary
@@ -379,9 +385,9 @@ print(shouting('Soft kitty. Warm kitty. Little ball of fur.'))
 
 print('''
 Indentation is Python's way of grouping elements.  An indented
-line is not the same as a non-indented line, and the level of 
-indentation affects how the code is interpreted.  Recommended 
-indentation is 4 spaces per level.  You should configure your 
+line is not the same as a non-indented line, and the level of
+indentation affects how the code is interpreted.  Recommended
+indentation is 4 spaces per level.  You should configure your
 text editor so that the Tab key gives 4 spaces.
 
 To show function documentation (and object introspection) in ipython shell:
@@ -422,7 +428,7 @@ print('''\nFilters:
 filter(function, sequence) returns a list of items in sequence
 for which function(item) is True
 ''')
-def f(x): 
+def f(x):
     '''Divisible by 3 or 5'''
     return x % 3 == 0 or x % 5 == 0
 print(filter(f, range(2, 25)))
@@ -437,7 +443,7 @@ print('''
 Dictionaries are a data structure indexed by keys, rather than
 integers (as lists and strings are indexed).
 A dictionary is an unordered set of key:value pairs, enclosed
-within { }, with the requirement that keys are unique within a 
+within { }, with the requirement that keys are unique within a
 given dictionary.
 ''')
 
@@ -475,7 +481,7 @@ print(inventory)
 inventory['burlap bag'] = ['apple', 'small ruby', 'three-toed sloth']
 inventory['pouch'].sort()
 inventory['backpack'].remove('dagger')
-inventory['gold'] += 50    
+inventory['gold'] += 50
 for key in sorted(inventory.keys()):
     print('%s: %s' %(key, inventory[key]))
 
@@ -487,10 +493,15 @@ for key in sorted(inventory.keys()):
 heading('Modules, namespaces and scripts')
 
 print('''\
+Modules:
 - A python module is a .py file containing definitions and executable
   statements
 - A triple-quoted comment at the beginning of the .py file is the
   documentation string for the module
+- When importing other modules in a .py file, it is convention (although
+  not required) to put all the import statements at the start of the file
+
+Namespaces:
 - A Python namespace is a variable name-to-object binding
 - The ipython interactive shell contains a global namespace similar
   to a Matlab workspace
@@ -499,15 +510,15 @@ print('''\
 If you have source code in a .py file, e.g. zoo.py, you can use the
 module in several ways:
 
-1) Run as a script from the system shell command line: 
+1) Run as a script from the system shell command line:
 
 python zoo.py
 
 2) Run as a script within an ipython interactive session:
 
 %run zoo.py
---> This runs the script in an empty namespace and loads all the results       
-    (variables, functions, etc.) into the global namespace of the  
+--> This runs the script in an empty namespace and loads all the results
+    (variables, functions, etc.) into the global namespace of the
     interactive ipython shell.  The command %run is an ipython magic command
     that runs a Python script (see magic commands in later section).
 
@@ -519,28 +530,27 @@ python zoo.py
 
 import zoo
 --> This runs all the code in zoo.py and stores its variables, functions,
-    and classes in an object called 'zoo'.  
+    and classes in an object called 'zoo'.
 ''')
 
 '''
 More on modules
----------------    
+---------------
 
 Suppose I have a module named zoo.py containing the following:
 
 ------- zoo.py -----------------------------------------
 def visit(animals, name):
     print('Welcome to the zoo, ' + name + '! We have: ')
-    for key in animals: 
+    for key in animals:
         print('  %d %s' % (animals[key], key))
 
 animals = {'zebras': 5, 'elephants': 4, 'penguins': 10}
 name = 'Jennifer'
 visit(animals, name)
 ---------------------------------------------------------
-
-Within an ipython interactive session:
 '''
+# Within an ipython interactive session:
 
 # Import the module
 import zoo
@@ -548,7 +558,7 @@ import zoo
 # I can use fully qualified variable and function names:
 print(zoo.animals)
 myanimals = {'tigers':2, 'koalas': 5}
-zoo.visit(myanimals, 'Ivy') 
+zoo.visit(myanimals, 'Ivy')
 
 # I can assign the visit function from zoo to a variable:
 myvisit = zoo.visit
@@ -563,7 +573,7 @@ Now suppose I edited zoo.py to add the opening hours to the end of the
 greeting message in the visit function:
 print('Our opening hours are Mon-Sun 8:00am - 8:00pm')
 
-If I run zoo.py as a script in ipython, all the changes will be 
+If I run zoo.py as a script in ipython, all the changes will be
 implemented and the opening hours will be printed.
 
 But if I have imported zoo.py as a module, the edits to the source file
@@ -593,28 +603,20 @@ use the command:
 dir()
 '''
 
-# -----------------------------------------------
-# Date and time
-# ----------------------------------------------
-
-heading('Date and time')
-
-from datetime import datetime
-now = datetime.now()
-
-print('%s/%s/%s %s:%s:%s' % (now.month, now.day, now.year, now.hour, now.minute, now.second))
-
 # ----------------------------------------------
 # Text file I/O
 # ----------------------------------------------
 
 heading('Text file I/O')
 
+# ----------------------------------------------------------------------
+# Reading a file
+
 filename = 'softkitty.txt'
 
-# The special mode 'rU' is the "Universal" option for text files where it's 
-# smart about converting different line-endings so they always come through 
-# as a simple '\n'.   
+# The special mode 'rU' is the "Universal" option for text files where it's
+# smart about converting different line-endings so they always come through
+# as a simple '\n'.
 f = open(filename, 'rU')
 
 # Iterate over the lines of the file
@@ -623,8 +625,49 @@ for line in f:
     print(str(count) + ' ' + line)
     count += 1
 
-# Close file    
+# You can also read the entire contents of a file all at once into one
+# giant string using .read()
+contents = f.read()
+
+# Close file
 f.close()
+
+# ----------------------------------------------------------------------
+# Writing a file
+
+outfile = 'browncoats.txt'
+f2 = open(outfile, 'w')
+f2.write("Inara: What did I say to you about barging into my shuttle?\n")
+f2.write("Mal: That it was manly and impulsive?\n")
+f2.write("Inara: Yes, precisely. Only the exact phrase I used was, \"Don't.\"\n")
+f2.close()
+# -----------------------------------------------
+# Handy modules
+# ----------------------------------------------
+
+heading('Handy modules')
+
+# Date and time
+print('Date and time')
+from datetime import datetime
+
+now = datetime.now()
+now = ('%s/%s/%s %s:%s:%s' %
+       (now.month, now.day, now.year, now.hour, now.minute, now.second))
+print(now)
+
+# ----------------------------------------------------------------------
+# Random numbers
+print('Random numbers')
+import random
+
+# Random decimal number in the interval [0, 1) (including 0, excluding 1)
+x1 = random.random()
+print(x1)
+
+# Random integer in the range [a,b], including both end points
+num = random.randint(1, 6)
+print(num)
 
 # ----------------------------------------------
 # Sorting
@@ -640,7 +683,7 @@ for w in sorted(myzoo):
 # Sort a dictionary by value, highest to lowest
 sortlist = sorted(myzoo, key = myzoo.get, reverse=True)
 for w in sortlist:
-    print(str(w) + ' ' + str(myzoo[w]))   
+    print(str(w) + ' ' + str(myzoo[w]))
 
 # ----------------------------------------------
 # IPython features
@@ -674,12 +717,12 @@ has been defined.
 %reset -->  Clears interactive namespace (like clear in Matlab)
 !cmd -->    Runs a Unix system command in the ipython shell
             e.g. !head -n 10 myfile.txt
-            
+
 Use $foo to pass the value of ipython variable foo as an argument to a
 command line magic command, e.g.:
 foo = 'test*'
 !ls $foo
-        
+
 Unassigned command outputs
 --------------------------
 _ gives last output
@@ -710,12 +753,11 @@ ipython notebook
 heading('Editor configuration')
 
 print('''\
-My preferred text editor configuration (e.g. with gedit in Ubuntu):
+My preferred text editor configuration (e.g. with Atom editor):
 - Syntax highlighting
 - Parentheses matching
 - Tab = 4 spaces (make sure no actual Tab characters are used!)
 - Auto-indent on
-- Keyboard shortcut Ctrl+Shift+- inserts #---------- (commented line) 
 ''')
 
 # ----------------------------------------------
@@ -731,14 +773,19 @@ for consistent, readable code.
 
 '''
 Naming Conventions
-CamelCase for classes
-lower_case_with_underscores for functions and methods
-Avoid built-in names such as str, len, list
+- CamelCase for classes
+- lower_case_with_underscores for functions and methods
+- Avoid built-in names such as str, len, list
 
 Best Practices:
-Maintain larger modules, each with high internal cohesion, rather than many
-tiny separate files.  Aim for a sensible and intuitive module and package
-structure for a large codebase.
+(Note - some of these are not followed in this .py file because its purpose is
+ to mimic an interactive ipython session and easily copy/paste code snippets)
+- Import statements at start of .py file
+- Single line comments on their own line
+- Maximum line width of 80 characters (for readability without text wrapping)
+- Maintain larger modules, each with high internal cohesion, rather than many
+  tiny separate files.  Aim for a sensible and intuitive module and package
+  structure for a large codebase.
 '''
 
 
