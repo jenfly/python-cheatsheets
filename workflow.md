@@ -119,10 +119,7 @@ git push -u origin master
 ```
 After initial setup of remote, can just use ```git push```
 
-Let's say I added a README.md file on github.com in the browser. To merge the online change with my local version:
-```
-git merge origin/master
-```
+
 --------------
 ### 4. Workflow & Daily Operations
 
@@ -144,6 +141,27 @@ Frequently used commands
 
 When to commit
 
+In my usual workflow I don't need to bother staging changes separately before
+committing, so I can skip the staging area using the `-a` option when committing,
+which automatically stages every file that is already tracked:
+```
+git commit -a -m "My commit message"
+```
+
+If I do want to use the staging area separately, I can stage all modified and
+new files for commit using the `-A` option with `git add`:
+```
+git add -A
+git status
+git commit -m "My commit message"
+```
+
+If I edit project files online in the browser at github.com (e.g. adding a
+README.md file), then I want to fetch the online changes and merge with my
+local version:
+```
+git pull origin master
+```
 
 ----------------
 ### 5. Development Approach
