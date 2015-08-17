@@ -52,7 +52,7 @@ Install from https://atom.io/
 Add to ~/.atom/keymap.cson:
 ```
 'atom-text-editor':
-    'ctrl-k': 'editor:delete-to-end-of-line'
+    'ctrl-k': 'editor:cut-to-end-of-line'
 ```
 
 Add to ~/.atom/snippets.cson:
@@ -62,10 +62,6 @@ Add to ~/.atom/snippets.cson:
     'prefix': '--'
     'body': '# ----------------------------------------------------------'
 ```
-##### Markdown Here
-For nice README files, save as .md (Markdown Here format).
-
-`Ctrl-Shift-m` to open/close Markdown Here preview window in Atom.
 
 -----------
 #### IPython
@@ -125,30 +121,38 @@ After initial setup of remote, can just use ```git push```
 
 #### Source code editing & testing
 
-* IPython shell and text editor open in adjacent windows
-* Edit source code in text editor and run in IPython using %run or %cpaste to run code snippets within IPython
-
-
-Pasting commands into ipython.
-
-Running scripts within ipython
-
-Readme files with GitHub Flavored Markdown
+* Edit source code in text editor
+* Launch IPython with `ipython --pylab` at the command line in an adjacent
+window.  The `--pylab` option allows plot windows to work properly and imports
+most of the numpy and matploblib modules into the interactive global namespace.
+* Test code in the IPython shell.  Two options:
+  1. Run the whole script in IPython using `%run foo.py`, or
+  2. Copy code snippets from editor and use `%paste` or `%cpaste` to paste
+  and run indented code snippets IPython
+* Use Git to commit changes to source code and other project files on at least
+a daily basis
+* For nice README files, save as .md (Markdown Here format).  Use
+`Ctrl-Shift-m` to open/close Markdown Here preview window in Atom.
 
 #### Git / GitHub operations
 
-Frequently used commands
+##### Commit frequency
 
-When to commit
+Commit changes frequently with descriptive messages.  Ideally, I will commit at
+each of the following milestones:
+* Added new functionality to existing code
+* Added a new file or renamed / reorganized files
+* Fixed a bug
+* Updated documentation
+* End of work day
 
-Create a project-specific .gitignore
 
 ##### Staging and committing
 
 In my usual workflow I don't need to bother staging changes separately before
-committing, so I can skip the staging area using the `-a` option when committing,
-which automatically stages every file that is already tracked (does not include
-new files that haven't been added to git yet):
+committing, so I can skip the staging area using the `-a` option when
+committing, which automatically stages every file that is already tracked (does
+not include new files that haven't been added to git yet):
 ```
 git commit -a -m "My commit message"
 ```
@@ -215,4 +219,6 @@ Test driven development practices?
 
 Agile development practices?
 
-- Maintain larger modules, each with high internal cohesion, rather than many tiny separate files.  Aim for a sensible and intuitive module and package structure for a large codebase.
+Maintain larger modules, each with high internal cohesion, rather than many
+tiny separate files.  Aim for a sensible and intuitive module and package
+structure for a large codebase.
