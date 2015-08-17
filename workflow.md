@@ -136,8 +136,13 @@ Pasting commands into ipython.
 
 Running scripts within ipython
 
-#### Git operations
+Readme files with GitHub Flavored Markdown
 
+#### Git / GitHub operations
+
+Frequently used commands
+
+When to commit
 
 
 ----------------
