@@ -10,14 +10,15 @@ Jennifer's cheat sheet for Python basic syntax and handy tips.
 - Dictionaries
 - Modules, namespaces and scripts
 - Text file I/O
-- Handy modules - date and time, random number
+- Handy modules - date and time, random numbers
 - Sorting
 - IPython features
 - Editor configuration
 - Conventions and best practices
 
-Each section of this cheatsheet can be copy/pasted into ipython and run
-separately in an interactive session.
+Each section of this cheatsheet can be copy/pasted into ipython (using the
+%paste magic command for indented code) and run separately in an interactive
+session.
 
 Many of these code snippets are pilfered / adapted from Google's Python Class
 (https://developers.google.com/edu/python/), the Python Tutorial
@@ -28,7 +29,7 @@ file or function is automatically used as the documentation
 string.
 '''
 
-print("\nWelcome to Jennifer's Python basics cheat sheet!".upper())
+print("\nWelcome to Jennifer's Python basics cheat sheet!")
 
 def heading(s):
     '''Prints a nice heading to the console.'''
@@ -96,7 +97,7 @@ bool1 = not (10>100)
 # Type
 print type(43) # int
 print type(1.2) # float
-print type('cat') # cat
+print type('cat') # string
 
 # ----------------------------------------------
 # Strings
@@ -109,7 +110,7 @@ str1 = "Cats say 'meow'."
 str2 = 'Dogs say "woof".'
 
 # Escape characters
-str3 = 'Well... my sister\'s a ship.  We had a complicated childhood.'
+str3 = 'Ford, you\'re turning into a penguin.  Stop it!'
 
 # Multi-line strings
 # --- With parentheses:
@@ -129,10 +130,10 @@ print(long1)
 print(long2)
 
 # String methods
-parrot = "Norwegian Blue"
-print(len(parrot))
-print(parrot.lower())
-print(parrot.upper())
+lunch = "Time is an illusion.  Lunchtime doubly so."
+print(len(lunch))
+print(lunch.lower())
+print(lunch.upper())
 pi = 3.14159
 print(str(pi)) # Convert to string
 s = str1 + " " + str2 # Concatenation
@@ -450,7 +451,6 @@ given dictionary.
 # Assigning a dictionary
 # --- Assign a list of key:value pairs
 greek = { 'a': 'alpha', 'b': 'beta', 'g': 'gamma'}
-print(greek)
 print(greek['a'])
 greek['d'] = 'delta' # Add a key:value pair
 print(greek) # Prints keys
@@ -625,22 +625,28 @@ for line in f:
     print(str(count) + ' ' + line)
     count += 1
 
-# You can also read the entire contents of a file all at once into one
-# giant string using .read()
-contents = f.read()
-
 # Close file
 f.close()
+
+# You can also read the entire contents of a file all at once into one
+# giant string using .read()
+f = open(filename, 'rU')
+contents = f.read()
+f.close()
+print(contents)
 
 # ----------------------------------------------------------------------
 # Writing a file
 
-outfile = 'browncoats.txt'
+outfile = 'out.txt'
 f2 = open(outfile, 'w')
-f2.write("Inara: What did I say to you about barging into my shuttle?\n")
-f2.write("Mal: That it was manly and impulsive?\n")
-f2.write("Inara: Yes, precisely. Only the exact phrase I used was, \"Don't.\"\n")
+f2.write('Curiously enough, the only thing that went through the mind of\n')
+f2.write('the bowl of petunias as it fell was "Oh no, not again". Many people\n')
+f2.write('have speculated that if we knew exactly why the bowl of petunias\n')
+f2.write('had thought that we would know a lot more about the nature of the\n')
+f2.write('Universe than we do now.')
 f2.close()
+
 # -----------------------------------------------
 # Handy modules
 # ----------------------------------------------
@@ -652,7 +658,7 @@ print('Date and time')
 from datetime import datetime
 
 now = datetime.now()
-now = ('%s/%s/%s %s:%s:%s' %
+now = ('%d/%d/%d %d:%d:%d' %
        (now.month, now.day, now.year, now.hour, now.minute, now.second))
 print(now)
 
@@ -766,6 +772,10 @@ My preferred text editor configuration (e.g. with Atom editor):
 
 heading('Conventions and best practices')
 
+'''Note: some of these are not followed in this .py file because its
+purpose is to mimic an interactive ipython session and easily copy/paste code
+snippets.'''
+
 print('''
 Follow PEP 0008 -- Style Guide for Python, from the Python Developer's Guide
 for consistent, readable code.
@@ -774,26 +784,24 @@ for consistent, readable code.
 '''
 Naming Conventions
 - CamelCase for classes
-- lower_case_with_underscores for functions and methods
+- lower_case_with_underscores for everything else
 - Avoid built-in names such as str, len, list
 
 Best Practices:
-(Note - some of these are not followed in this .py file because its purpose is
- to mimic an interactive ipython session and easily copy/paste code snippets)
 - Import statements at start of .py file
 - Single line comments on their own line
 - Maximum line width of 80 characters (for readability without text wrapping)
+- First line of docstring is a concise summary of the function.  If including
+  additional lines, separate them from the first line with a blank second line.
 - Maintain larger modules, each with high internal cohesion, rather than many
   tiny separate files.  Aim for a sensible and intuitive module and package
   structure for a large codebase.
 '''
 
-
 # Zen of Python
 # PEP 20 by Tim Peters, from the Python Developer's Guide
 # https://www.python.org/dev/peps/pep-0020/
 # Displays on the python console with the command 'import this'
-
 print('''\
 The Zen of Python
 

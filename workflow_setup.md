@@ -5,7 +5,7 @@ This document summarizes my development environment and workflow for Python:
 1. Development Environment Overview
 2. Initial Setup & Configuration  
 3. Creating a New Project
-4. Day-to-Day Operations
+4. Workflow
 5. Development Approach
 
 -------
@@ -15,7 +15,7 @@ Component | Details
 ------- | --------- |
 Python | Python 2.7 Anaconda distribution
 Atom | Text editor for .py and other source files
-IPython | Enhanced interactive Python shell for scientific computing (included in Anaconda)
+IPython | Enhanced interactive Python shell for scientific computing
 Git / GitHub | Version control and code sharing
 
 -----------
@@ -70,7 +70,9 @@ For nice README files, save as .md (Markdown Here format).
 -----------
 #### IPython
 
-Set up auto-logging
+Included in Anaconda distribution
+
+Set up auto-logging TBD
 
 -----------
 #### Git
@@ -122,7 +124,7 @@ Let's say I added a README.md file on github.com in the browser. To merge the on
 git merge origin/master
 ```
 --------------
-### 4. Day-to-Day Operations
+### 4. Workflow
 
 * IPython shell and text editor open in adjacent windows
 * Edit source code in text editor and run in IPython using %run or %cpaste to run code snippets within IPython
