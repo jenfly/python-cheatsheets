@@ -213,7 +213,8 @@ git config --list # Check your config settings
 ----------------
 ### 5. Development Approach
 
-Incremental milestones and iterative development -- use commits to track
+Incremental milestones and iterative development: Identify first milestone, get
+it working, then go on to the next milestone. Use git commits to track.
 
 Test driven development practices?
 
