@@ -141,9 +141,14 @@ Frequently used commands
 
 When to commit
 
+Create a project-specific .gitignore
+
+##### Staging and committing
+
 In my usual workflow I don't need to bother staging changes separately before
 committing, so I can skip the staging area using the `-a` option when committing,
-which automatically stages every file that is already tracked:
+which automatically stages every file that is already tracked (does not include
+new files that haven't been added to git yet):
 ```
 git commit -a -m "My commit message"
 ```
@@ -152,9 +157,37 @@ If I do want to use the staging area separately, I can stage all modified and
 new files for commit using the `-A` option with `git add`:
 ```
 git add -A
-git status
 git commit -m "My commit message"
 ```
+
+##### Adding, deleting, and renaming files
+
+To add new files to be tracked in git and stage them for commit:
+```
+git add file.txt    # Add a specific file
+git add *.txt       # Add all .txt files
+git add -A          # Add all new and modified files
+```
+
+To delete a file:
+```
+git rm file.txt # Removes file from git
+git commit -m "Deleted file.txt" # Deletes file.txt from working directory
+```
+
+To rename a file:
+```
+git mv file.txt file2.txt # Renames in git
+git commit -m "Renamed file2.txt" # Renames the file in working directory
+```
+
+##### Ignoring files
+
+Create a `.gitignore` file in the project working directory with a
+list of project-specific files to ignore in addition to the ignored
+files listed in `~/.gitignore_global`.
+
+##### Pulling from server
 
 If I edit project files online in the browser at github.com (e.g. adding a
 README.md file), then I want to fetch the online changes and merge with my
@@ -163,6 +196,16 @@ local version:
 git pull origin master
 ```
 
+##### Handy commands
+
+```
+git status  # Current status
+git diff    # Changes since last commit
+git log     # List of commits
+git whatchanged     # List of commits with more details
+git whatchanged --since="2 weeks ago"   # Change history last 2 weeks
+git config --list # Check your config settings
+```
 ----------------
 ### 5. Development Approach
 
