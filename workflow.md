@@ -2,14 +2,14 @@
 
 This document summarizes my development environment and workflow for Python:
 
-1. Development Environment Overview
+1. Development Environment
 2. Initial Setup & Configuration  
 3. Creating a New Project
-4. Workflow
+4. Workflow & Daily Operations
 5. Development Approach
 
 -------
-### 1. Development Environment Overview
+### 1. Development Environment
 
 Component | Details
 ------- | --------- |
@@ -110,7 +110,7 @@ git status
 git commit -m "My first commit"
 ```
 
-On github.com -- create new repo project1 and get its url
+On github.com -- create a new repo called "project1" and get its URL
 
 On local machine, link up with github.com repo and push changes:
 ```
@@ -124,7 +124,9 @@ Let's say I added a README.md file on github.com in the browser. To merge the on
 git merge origin/master
 ```
 --------------
-### 4. Workflow
+### 4. Workflow & Daily Operations
+
+#### Source code editing & testing
 
 * IPython shell and text editor open in adjacent windows
 * Edit source code in text editor and run in IPython using %run or %cpaste to run code snippets within IPython
@@ -134,5 +136,17 @@ Pasting commands into ipython.
 
 Running scripts within ipython
 
+#### Git operations
+
+
+
 ----------------
 ### 5. Development Approach
+
+Incremental milestones and iterative development -- use commits to track
+
+Test driven development practices?
+
+Agile development practices?
+
+- Maintain larger modules, each with high internal cohesion, rather than many tiny separate files.  Aim for a sensible and intuitive module and package structure for a large codebase.

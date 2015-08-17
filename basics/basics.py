@@ -793,9 +793,6 @@ Best Practices:
 - Maximum line width of 80 characters (for readability without text wrapping)
 - First line of docstring is a concise summary of the function.  If including
   additional lines, separate them from the first line with a blank second line.
-- Maintain larger modules, each with high internal cohesion, rather than many
-  tiny separate files.  Aim for a sensible and intuitive module and package
-  structure for a large codebase.
 '''
 
 # Zen of Python
