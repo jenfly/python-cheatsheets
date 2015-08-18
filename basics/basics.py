@@ -742,9 +742,10 @@ use the commands: logstart, logstop, logstate
 
 Integration with matplotlib
 ---------------------------
-Launch ipython with the --pylab option (i.e. ipython --pylab from command
-line).  This allows plot windows to work properly and imports most of
-the numpy and matplotlib modules into the interactive global namespace.
+Launch ipython with the --matplotlib option (i.e. ipython --matplotlib from
+command line).  This allows plot windows to work properly (keeps them from
+taking over the command line).  I add this as an alias in my ~/.bashrc file
+so I don't have to specify the option each time I launch ipython.
 
 Notebooks
 ---------

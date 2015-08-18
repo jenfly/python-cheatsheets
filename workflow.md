@@ -68,7 +68,17 @@ Add to ~/.atom/snippets.cson:
 
 Included in Anaconda distribution
 
+##### Matplotlib integration
+
+For my workflow, I always want to launch IPython with the `--matplotlib` option,
+so that figure windows work properly, so I add to my aliases in my
+`~/.bashrc` file:
+```
+alias ipython='ipython --matplotlib'
+```
+##### Automatic logging of sessions
 Set up auto-logging TBD
+
 
 -----------
 #### Git
@@ -122,9 +132,8 @@ After initial setup of remote, can just use ```git push```
 #### Source code editing & testing
 
 * Edit source code in text editor
-* Launch IPython with `ipython --pylab` at the command line in an adjacent
-window.  The `--pylab` option allows plot windows to work properly and imports
-most of the numpy and matploblib modules into the interactive global namespace.
+* Launch IPython from the command line in an adjacent
+window.
 * Test code in the IPython shell.  Two options:
   1. Run the whole script in IPython using `%run foo.py`, or
   2. Copy code snippets from editor and use `%paste` or `%cpaste` to paste
