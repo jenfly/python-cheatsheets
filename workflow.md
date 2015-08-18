@@ -32,7 +32,11 @@ conda update ipython ipython-notebook ipython-qtconsole
 ```
 
 ##### Install additional libraries
-netCDF instructions TBD
+Add the basemap and netCDF packages:
+```
+conda install basemap
+conda install netcdf4
+```
 
 -----------
 #### Atom Text Editor
