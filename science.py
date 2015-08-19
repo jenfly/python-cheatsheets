@@ -182,10 +182,12 @@ print(arr) # The same as before!
 
 cats = np.array(['tabby', 'calico', 'siamese', 'tabby', 'siamese',
     'calico', 'calico'])
-data = np.zeros((7, 4))
-data[0] = np.arange(4)
-for i in range(1,7):
-    data[i] = data[i-1] + 4
+
+def numbers_array(nrow, ncol):
+    return np.arange(nrow*ncol).reshape((nrow, ncol))
+
+data = numbers_array(7, 4)
+data[:,2] -= 20
 print(cats)
 print(data)
 
@@ -202,7 +204,7 @@ print(mask)
 print(data[mask])
 
 # Change parts of the ndarray selected by Boolean indexing
-data[data > 25] = 0
+data[data < 0] = 0
 print(data)
 data[cats != 'calico'] = -5
 print(data)
@@ -214,6 +216,19 @@ print(subset)
 subset[0] = 10 # Changes subset but not data
 print(subset)
 print(data) # Same as before
+
+# ----------------------------------------------------------------------
+# Fancy indexing
+
+a = numbers_array(8, 4)
+print(a)
+print(a[[4, 0, 2]]) # Rows 4, 0, 2
+print(a[[-1, -3]]) # Rows -1 (last) and -3 (3rd last)
+print(a[[1, 5, 7, 2], [0, 3, 1, 2]]) # Elements [1,0], [5,3], [7,1], [2,2]
+print(a[[1, 5, 7, 2]][:, [0, 2]]) # Columns 0 and 2 of rows 1, 5, 7, 2
+
+# The np.ix_ function returns an open mesh from multiple sequences
+print(a[np.ix_([1,3], [2,0])]) # [[a[1,2] a[1,0]], [a[3,2] a[3,0]]]
 
 
 # ----------------------------------------------------------------------
