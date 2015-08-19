@@ -93,7 +93,7 @@ x1 = np.arange(15) # ndarray version of Python built-in range() function
 # Mathematical operations
 
 # Basic math operations between arrays (or between an array and a scalar)
-# operate element-wise on the arrays
+# are applied element-wise on the arrays
 arr = np.array([[1., 2., 3.], [4., 5., 6.]])
 print(arr)
 print(arr + 10)
@@ -106,6 +106,7 @@ print(arr ** 0.5)
 # Type conversions
 
 # The astype() method of ndarray casts from one type to another
+# -- Note: standard Python float corresponds to np.float64
 arr = np.array([1, 2, 3, 4, 5])
 float_arr = arr.astype(np.float64)
 print(arr.dtype, float_arr.dtype)
@@ -126,6 +127,93 @@ arr = int_array.astype(float_array.dtype)
 
 # ----------------------------------------------------------------------
 # Basic indexing and slicing
+
+# 1-D array
+arr = np.arange(10)
+print(arr)
+print(arr[5])
+print(arr[5:8])
+arr[5:8] = 12
+print(arr)
+
+# 2-D array
+arr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print(arr2d[2])
+print(arr2d[0][2])
+print(arr2d[0, 2])
+
+# 3-D array
+arr3d = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
+print(arr3d)
+print(arr3d[0])
+print(arr3d[1, 0])
+old_values = arr3d[0].copy()
+arr3d[0] = 42
+print(arr3d)
+arr3d[0] = old_values
+print(arr3d)
+
+# ----------------------------------------------------------------------
+# Slices - views vs. copies
+
+print('''\
+Array slices are *views* on the original array, not copies, so if you modify
+a view, the source array is modified too! To copy a slice, use .copy()
+''')
+arr = np.arange(10)
+print(arr)
+slice1 = arr[2:7] # slice1 is a view on arr
+print(slice1)
+slice1[:2] = -42 # This modifies the source array 'arr' also!
+print(slice1)
+print(arr) # Has changed!
+
+# To make a copy of a slice, rather than a view, use the .copy() method
+arr = np.arange(10)
+print(arr)
+slice1 = arr[2:7].copy() # Now we have a copy of the contents
+print(slice1)
+slice1[:2] = -42 # arr does not change
+print(slice1)
+print(arr) # The same as before!
+
+# ----------------------------------------------------------------------
+# Boolean indexing
+
+cats = np.array(['tabby', 'calico', 'siamese', 'tabby', 'siamese',
+    'calico', 'calico'])
+data = np.zeros((7, 4))
+data[0] = np.arange(4)
+for i in range(1,7):
+    data[i] = data[i-1] + 4
+print(cats)
+print(data)
+
+print(cats == 'tabby')
+print(data[cats == 'tabby'])
+print(data[cats == 'tabby', 2:])
+print(data[cats == 'tabby', 3])
+
+# numpy uses &, | and ! instead of and, or and not as in built-in Python
+print(data[cats != 'tabby'])
+print(data[-(cats == 'tabby')]) # Same as data[cats != 'tabby']
+mask = (cats == 'tabby') | (cats == 'siamese')
+print(mask)
+print(data[mask])
+
+# Change parts of the ndarray selected by Boolean indexing
+data[data > 25] = 0
+print(data)
+data[cats != 'calico'] = -5
+print(data)
+
+# Note: Unlike slicing with numeric indices, Boolean indexing always creates
+# a copy of the data.
+subset = data[cats == 'calico'] # Makes a copy
+print(subset)
+subset[0] = 10 # Changes subset but not data
+print(subset)
+print(data) # Same as before
 
 
 # ----------------------------------------------------------------------
