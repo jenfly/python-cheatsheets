@@ -612,7 +612,7 @@ heading('Text file I/O')
 # ----------------------------------------------------------------------
 # Reading a file
 
-filename = 'softkitty.txt'
+filename = 'data/softkitty.txt'
 
 # The special mode 'rU' is the "Universal" option for text files where it's
 # smart about converting different line-endings so they always come through
@@ -638,7 +638,7 @@ print(contents)
 # ----------------------------------------------------------------------
 # Writing a file
 
-outfile = 'out.txt'
+outfile = 'data/out.txt'
 f2 = open(outfile, 'w')
 f2.write('Curiously enough, the only thing that went through the mind of\n')
 f2.write('the bowl of petunias as it fell was "Oh no, not again". Many people\n')
