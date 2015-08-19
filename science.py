@@ -82,13 +82,15 @@ data2 = np.array([1, 2, 3], dtype=np.int32)
 print(data1.dtype)
 print(data2.dtype)
 
-# Arrays of zeros, ones, empty, and ranges
+# Arrays of zeros, ones, and empty
 zeros1 = np.zeros(10)
 zeros2 = np.zeros((3, 6))
 empty1 = np.empty((2, 3, 2)) # Empty arrays are initialized with misc garbage
 ones1 = np.ones((4, 5))
-x1 = np.arange(15) # ndarray version of Python built-in range() function
 
+# Ranges of numbers and evenly spaced line segements
+x1 = np.arange(3, 15, 2) # ndarray version of Python built-in range() function
+x2 = np.linspace(0, 4.5, 10) # Divides the range (inclusive) into 10 segments
 # ----------------------------------------------------------------------
 # Mathematical operations
 
