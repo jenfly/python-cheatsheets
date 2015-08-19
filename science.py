@@ -102,6 +102,17 @@ print(arr - arr)
 print(1 / arr)
 print(arr ** 0.5)
 
+# Universal functions:  fast element-wise array functions
+arr = np.array([1., 4., 6., 9.])
+print(np.sqrt(arr))
+print(np.exp(arr))
+x, y = np.random.randn(8).round(1), np.random.randn(8).round(1)
+print(x)
+print(y)
+print(np.maximum(x, y)) # element-wise maximum
+arr = (np.random.randn(7) * 5).round(2)
+print(np.modf(arr)) # decimal and integer components of each element
+
 # ----------------------------------------------------------------------
 # Type conversions
 
@@ -229,6 +240,20 @@ print(a[[1, 5, 7, 2]][:, [0, 2]]) # Columns 0 and 2 of rows 1, 5, 7, 2
 
 # The np.ix_ function returns an open mesh from multiple sequences
 print(a[np.ix_([1,3], [2,0])]) # [[a[1,2] a[1,0]], [a[3,2] a[3,0]]]
+
+# ----------------------------------------------------------------------
+# Transposing arrays and swapping axes
+
+arr = numbers_array(3, 5)
+print(arr)
+print(arr.T) # Transpose
+print(np.dot(arr.T, arr)) # Dot product using np.dot()
+print(arr.T.dot(arr)) # Dot product using .dot() method on arr.T
+
+arr = np.arange(16).reshape((2, 2, 4))
+print(arr)
+print(arr.transpose((1, 0, 2)))
+print(arr.swapaxes(1, 2))
 
 
 # ----------------------------------------------------------------------
