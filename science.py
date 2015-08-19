@@ -105,6 +105,10 @@ print(1 / arr)
 print(arr ** 0.5)
 
 # Universal functions:  fast element-wise array functions
+x1 = np.random.randn(5)
+x2 = x1.round(2) # Round each element to 2 decimal places
+print(x1)
+print(x2)
 arr = np.array([1., 4., 6., 9.])
 print(np.sqrt(arr))
 print(np.exp(arr))
@@ -244,18 +248,115 @@ print(a[[1, 5, 7, 2]][:, [0, 2]]) # Columns 0 and 2 of rows 1, 5, 7, 2
 print(a[np.ix_([1,3], [2,0])]) # [[a[1,2] a[1,0]], [a[3,2] a[3,0]]]
 
 # ----------------------------------------------------------------------
+# Expressing conditional logic as array operations
+
+xarr = np.array([1.1, 1.2, 1.3, 1.4, 1.5])
+yarr = np.array([2.1, 2.2, 2.3, 2.4, 2.5])
+cond = np.array([True, False, True, True, False])
+result = [(x if c else y) for x, y, c in zip(xarr, yarr, cond)]
+print(result)
+result = np.where(cond, xarr, yarr) # Vectorized version of above
+print(result)
+
+arr = np.random.randn(4, 4).round(1)
+print(arr)
+print(np.where(arr > 0, 2, -2))
+print(np.where(arr > 0, 2, arr)) # set only positive values to 2
+
+# ----------------------------------------------------------------------
 # Transposing arrays and swapping axes
 
 arr = numbers_array(3, 5)
 print(arr)
 print(arr.T) # Transpose
-print(np.dot(arr.T, arr)) # Dot product using np.dot()
-print(arr.T.dot(arr)) # Dot product using .dot() method on arr.T
 
 arr = np.arange(16).reshape((2, 2, 4))
 print(arr)
 print(arr.transpose((1, 0, 2)))
 print(arr.swapaxes(1, 2))
+
+# ----------------------------------------------------------------------
+# Linear algebra
+
+x = np.array([[1., 2., 3.], [4., 5., 6.]])
+y = np.array([[6., 23.], [-1, 7], [8, 9]])
+print(x.dot(y))  # Dot product using .dot() method
+print(np.dot(x,y)) # Dot product using np.dot()
+
+X = np.random.randn(5, 5).round(1)
+mat = X.T.dot(X)
+inv = np.linalg.inv(mat)
+print(mat.round(2))
+print(inv.round(2))
+print(mat.dot(inv).round(2))
+
+# ----------------------------------------------------------------------
+# Mathematical and statistical methods
+
+arr = np.random.randn(5, 4).round(2)
+print(arr.mean())
+print(np.mean(arr)) # Equivalent to .mean()
+print(arr.mean(axis=0)) # Specify which axis to operate along
+
+print(arr.sum())
+print(arr.sum(axis=1)) # Sum along axis 1
+print(arr.sum(1)) # Equivalent to .sum(1)
+
+arr = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+print(arr.cumsum(0)) # Cumulative sum along axis 0
+print(arr.cumprod(1)) # Cumulative product along axis 1
+
+# Methods for boolean arrays
+arr = np.random.randn(100)
+npos = (arr > 0).sum() # Number of positive values in arr
+
+bools = np.array([False, False, True, False])
+bools.any() # True if any element in bools is True
+bools.all() # True if all elements in bools are True
+
+# ----------------------------------------------------------------------
+# Sorting
+
+arr = np.random.randn(8).round(1)
+print(arr)
+arr.sort() # Sorts the array in place
+print(arr)
+
+arr = np.random.randn(5, 3).round(1)
+print(arr)
+arr.sort(1) # Sort along axis 1
+print(arr)
+
+large_arr = np.random.randn(1000)
+large_arr.sort()
+quant5 = large_arr[int(0.05 * len(large_arr))] # 5% quantile
+print(quant5)
+
+# ----------------------------------------------------------------------
+# Unique and other set logic
+
+names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
+print(np.unique(names)) # ndarray of unique names
+print(set(names)) # Python set object of unique names
+print(sorted(np.unique(names))) # Sorted ndarray
+ints = np.array([3, 3, 3, 2, 2, 1, 1, 4, 4])
+print(np.unique(ints))
+
+values = np.array([6, 0, 0, 3, 2, 5, 6])
+in_val = np.in1d(values, [2, 3, 6]) # in_val[i]=True if values[i] is 2, 3 or 6
+
+# ----------------------------------------------------------------------
+# File input and output with arrays
+
+# Storing arrays on disk in binary format
+arr = np.arange(10)
+np.save('some_array', arr)
+np.load('some_array.npy')
+
+# Loading text files
+'''
+arr = np.loadtxt('array_ex.txt', delimiter=',')
+'''
 
 
 # ----------------------------------------------------------------------
@@ -263,6 +364,15 @@ print(arr.swapaxes(1, 2))
 # ----------------------------------------------------------------------
 
 heading('matplotlib:  2-D plots and visualizations')
+
+points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
+xs, ys = np.meshgrid(points, points)
+z = np.sqrt(xs ** 2 + ys ** 2)
+print(z)
+plt.imshow(z, cmap=plt.cm.gray)
+plt.colorbar()
+plt.title('Image plot of $\sqrt{x^2 + y^2}$ for a grid of values')
+plt.draw()
 
 
 # ----------------------------------------------------------------------
