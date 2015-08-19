@@ -369,10 +369,27 @@ points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
 xs, ys = np.meshgrid(points, points)
 z = np.sqrt(xs ** 2 + ys ** 2)
 print(z)
-plt.imshow(z, cmap=plt.cm.gray)
+plt.pcolormesh(xs, ys, z, cmap=plt.cm.gray)
 plt.colorbar()
-plt.title('Image plot of $\sqrt{x^2 + y^2}$ for a grid of values')
-plt.draw()
+plt.title('$\sqrt{x^2 + y^2}$ for a grid of values')
+
+'''
+When running a script in ipython, the figures usually aren't visible when
+the script completes.  To show them:
+plt.show()
+'''
+
+# Create a new figure with jet colormap
+plt.figure()
+plt.pcolormesh(xs, ys, z, cmap=plt.cm.jet)
+
+
+'''
+To close figure windows:
+plt.close(1)        # Closes figure 1
+plt.close('all')    # Closes all open figure windows
+'''
+
 
 
 # ----------------------------------------------------------------------
@@ -381,6 +398,7 @@ plt.draw()
 
 heading('basemap: Plotting geographic data')
 
+plt.figure()
 m = Basemap()
 m.drawcoastlines()
 m.drawcountries()
