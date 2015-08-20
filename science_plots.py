@@ -7,6 +7,7 @@ matplotlib and basemap.
 - Annotations
 - Bar charts
 - Scatter plots
+- Fill plots
 
 Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
@@ -281,7 +282,26 @@ plt.figure()
 plt.contourf(xi, yi, zi)
 plt.colorbar()
 
+# ----------------------------------------------------------------------
+# Fill plots
+# ----------------------------------------------------------------------
 
+x = np.linspace(0, 1, 1000)
+y = np.sin(4 * np.pi * x) * np.exp(-5 * x)
+
+plt.figure()
+
+# Fill between curve and x-axis using fill()
+plt.subplot(2,1,1)
+plt.fill(x, y, 'r')
+plt.grid(True)
+
+# Fill between specified values of y using fill_between()
+plt.subplot(2,1,2)
+plt.plot(x, y, 'k')
+plt.fill_between(x, 0.2, y, y > 0.2,color='red', alpha=.25)
+plt.fill_between(x, y, -0.1, y < -0.1, color='blue', alpha=.25)
+plt.grid(True)
 # ----------------------------------------------------------------------
 # basemap
 # ----------------------------------------------------------------------
