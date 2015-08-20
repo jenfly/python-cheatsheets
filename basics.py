@@ -1,5 +1,5 @@
 '''
-Jennifer's cheat sheet for Python basic syntax and handy tips.
+Jennifer's cheatsheet for Python basic syntax and handy tips.
 - Variables and basic operations
 - Strings
 - Console input
@@ -29,7 +29,7 @@ file or function is automatically used as the documentation
 string.
 '''
 
-print("\nWelcome to Jennifer's Python basics cheat sheet!")
+print("\nWelcome to Jennifer's Python basics cheatsheet!")
 
 def heading(s):
     '''Prints a nice heading to the console.'''
