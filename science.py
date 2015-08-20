@@ -388,6 +388,18 @@ plt.figure()
 plt.pcolormesh(xs, ys, z, cmap=plt.cm.jet)
 plt.colorbar()
 
+# Playing around with pcolormesh and contourf
+x = np.arange(10)
+y = x
+xi, yi = np.meshgrid(x, y)
+zi = np.random.randn(10, 10)
+plt.figure()
+plt.pcolormesh(xi, yi, zi)
+plt.colorbar()
+plt.figure()
+plt.contourf(xi, yi, zi)
+plt.colorbar()
+
 # ----------------------------------------------------------------------
 # Example from matplotlib tutorial at
 # http://www.labri.fr/perso/nrougier/teaching/matplotlib/
