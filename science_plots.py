@@ -5,6 +5,7 @@ matplotlib and basemap.
 - Subplots
 - Histograms
 - Annotations
+- Bar charts
 
 Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
@@ -60,6 +61,7 @@ plt.show()
 
 Other operations with figure windows:
 plt.figure()        # Creates a new figure window
+plt.get_fignums()   # Returns a list of all the figures currently open
 plt.clf()           # Clears the current figure
 plt.cla()           # Clears the current axes
 plt.close(1)        # Closes figure 1
@@ -108,23 +110,27 @@ plt.legend(loc='upper left', frameon=False)
 # Subplots
 # ----------------------------------------------------------------------
 
-def f(t):
-    return np.exp(-t) * np.cos(2*np.pi*t)
-
-t1 = np.arange(0.0, 5.0, 0.1)
-t2 = np.arange(0.0, 5.0, 0.02)
-
+x1 = np.linspace(0.0, 5.0)
+x2 = np.linspace(0.0, 2.0)
+y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
+y2 = np.cos(2 * np.pi * x2)
 plt.figure()
 
 # plt.subplot(numrows, numcols, numfig)
 plt.subplot(2, 1, 1)
-plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+plt.plot(x1, y1, 'yo-')
+plt.title('A tale of 2 subplots')
+plt.ylabel('Damped oscillation')
 
 # The commas can be omitted in subplot() if numrows, numcols and numfig
 # are all less than 10
 plt.subplot(212)
-plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
+plt.plot(x2, y2, 'r.-')
+plt.xlabel('time (s)')
+plt.ylabel('Undamped')
 
+# To tighten up the space between and around subplots, use tight_layout()
+plt.tight_layout()
 # ----------------------------------------------------------------------
 # Histogram
 # ----------------------------------------------------------------------
@@ -165,6 +171,37 @@ plt.ylim(-2,2)
 # Annotate with arrow and text
 plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5),
             arrowprops=dict(facecolor='black', shrink=0.05))
+
+# ----------------------------------------------------------------------
+# Bar charts
+# ----------------------------------------------------------------------
+
+n_groups = 5
+means_men = (20, 35, 30, 35, 27)
+std_men = (2, 3, 4, 1, 2)
+means_women = (25, 32, 34, 20, 25)
+std_women = (3, 5, 2, 3, 3)
+
+fig, ax = plt.subplots()
+
+index = np.arange(n_groups)
+bar_width = 0.35
+opacity = 0.4
+error_config = {'ecolor': '0.3'}
+
+rects1 = plt.bar(index, means_men, bar_width, alpha=opacity,
+            color='b', yerr=std_men, error_kw=error_config, label='Men')
+
+rects2 = plt.bar(index + bar_width, means_women, bar_width, alpha=opacity,
+            color='r', yerr=std_women, error_kw=error_config, label='Women')
+
+plt.xlabel('Group')
+plt.ylabel('Scores')
+plt.title('Scores by group and gender')
+plt.xticks(index + bar_width, ('A', 'B', 'C', 'D', 'E'))
+plt.legend()
+plt.tight_layout()
+
 # ----------------------------------------------------------------------
 points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
 xs, ys = np.meshgrid(points, points)
