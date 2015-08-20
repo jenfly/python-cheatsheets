@@ -20,12 +20,14 @@ Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
 session.
 
-Many of these code snippets are pilfered / adapted from Google's Python Class
-(https://developers.google.com/edu/python/), the Python Tutorial
-(https://docs.python.org/2/tutorial/) and codecademy.com.
+Many of these code snippets are pilfered / adapted from:
+- Google's Python Class
+  (https://developers.google.com/edu/python/)
+- Python Tutorial (https://docs.python.org/2/tutorial/)
+- codecademy.com
 
-A triple-quoted comment at the beginning of a module (.py)
-file or function is automatically used as the documentation
+A triple-quoted comment at the beginning of a module (.py file)
+or function is automatically used as the documentation
 string.
 '''
 
@@ -118,7 +120,7 @@ str3 = 'Ford, you\'re turning into a penguin.  Stop it!'
 long1 = ("I can't keep track of her when she's *not* incorporeally possessing "
          "a space ship; don't look at me.")
 # --- With triple quotation marks:
-#     Include \ at end of line to exclude new line
+#     Use \ at end of line to exclude new line
 long2 = """\
 They say the snow on the roof is too heavy. \
 They say the ceiling will cave in. \
@@ -235,7 +237,7 @@ del a # Now a no longer exists
 
 # Defining numeric lists
 x1 = range(5) # 0, 1, 2, 3, 4
-x2 = range(0, 10) # 0, 1, 2, 3, 4
+x2 = range(0, 5) # 0, 1, 2, 3, 4
 x3 = range(0,10,2) # 0, 2, 4, 6, 8
 
 # Sets
