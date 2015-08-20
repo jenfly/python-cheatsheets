@@ -1,12 +1,18 @@
 '''
 Jennifer's cheatsheet for scientific computing with Python - plotting with
 matplotlib and basemap.
+- matplotlib basics
+- Subplots
+- Histograms
+- Annotations
 
 Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
 session.
 
 Many of these code snippets are pilfered / adapted from:
+- Matplotlib documentation
+  http://matplotlib.org/users/pyplot_tutorial.html
 - Matplotlib tutorial
   http://www.labri.fr/perso/nrougier/teaching/matplotlib/
 - Basemap tutorial
@@ -42,7 +48,7 @@ heading('Plotting with matploblib and basemap')
 # ----------------------------------------------------------------------
 
 # ----------------------------------------------------------------------
-# matplotlib
+# matplotlib basics
 # ----------------------------------------------------------------------
 
 heading('matplotlib:  2-D plots and visualizations')
@@ -52,11 +58,114 @@ When running a script in ipython, the figures usually aren't visible when
 the script completes.  To show them:
 plt.show()
 
-To close figure windows:
+Other operations with figure windows:
+plt.figure()        # Creates a new figure window
+plt.clf()           # Clears the current figure
+plt.cla()           # Clears the current axes
 plt.close(1)        # Closes figure 1
 plt.close('all')    # Closes all open figure windows
 ''')
 
+# ----------------------------------------------------------------------
+# Simple plot using format strings such as 'r-'
+t = np.arange(0., 5., 0.2)
+
+plt.figure()
+plt.plot(t, t, 'r-', t, t**2, 'bs', t, t**3, 'g^')
+plt.xlabel('t')
+plt.ylabel('f(t)')
+
+# ----------------------------------------------------------------------
+# Using keyword arguments, formatting ticks, adding legends and labels
+
+pi = np.pi
+X = np.linspace(-pi, pi, 256,endpoint=True)
+C,S = np.cos(X), np.sin(X)
+
+plt.figure()
+plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-", label='cosine')
+plt.plot(X, S, color="red", linewidth=2.5, linestyle="--", label='sine')
+
+# Specify ticks and tick labels
+# -- the r'' in the tick label indicates that it is a raw string so that
+#    Python doesn't treat the \ as an escape character (lets the LaTeX
+#    interpreter take care of it)
+plt.xticks([-pi, -pi/2, 0, pi/2, pi],
+    [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$\pi/2$', r'$\pi$'])
+plt.yticks([-1, -0.5, 0, 0.5, 1])
+plt.ylim(C.min()*1.1, C.max()*1.1)
+
+# Add labels
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Simple Line Plot')
+
+# Add legend
+# -- Uses the labels specified in the plot() commands
+plt.legend(loc='upper left', frameon=False)
+
+# ----------------------------------------------------------------------
+# Subplots
+# ----------------------------------------------------------------------
+
+def f(t):
+    return np.exp(-t) * np.cos(2*np.pi*t)
+
+t1 = np.arange(0.0, 5.0, 0.1)
+t2 = np.arange(0.0, 5.0, 0.02)
+
+plt.figure()
+
+# plt.subplot(numrows, numcols, numfig)
+plt.subplot(2, 1, 1)
+plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+
+# The commas can be omitted in subplot() if numrows, numcols and numfig
+# are all less than 10
+plt.subplot(212)
+plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
+
+# ----------------------------------------------------------------------
+# Histogram
+# ----------------------------------------------------------------------
+
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(10000)
+
+# Histogram of the data
+plt.figure()
+n, bins, patches = plt.hist(x, 50, normed=1, facecolor='g', alpha=0.75)
+plt.xlabel('Smarts')
+plt.ylabel('Probability')
+plt.title('Histogram of IQ')
+
+# Add a text annotation
+plt.text(60, .025, r'$\mu=100,\ \sigma=15$')
+
+# Set limits for both axes together: [xmin, xmax, ymin, ymax]
+plt.axis([40, 160, 0, 0.03])
+
+# Turn on grid lines
+plt.grid(True)
+
+# ----------------------------------------------------------------------
+# Annotations
+# ----------------------------------------------------------------------
+
+t = np.arange(0.0, 5.0, 0.01)
+s = np.cos(2*pi*t)
+
+plt.figure()
+
+# Return handles to axes and line object
+ax = plt.subplot(111)
+line, = plt.plot(t, s, lw=2)
+plt.ylim(-2,2)
+
+# Annotate with arrow and text
+plt.annotate('local max', xy=(2, 1), xytext=(3, 1.5),
+            arrowprops=dict(facecolor='black', shrink=0.05))
+# ----------------------------------------------------------------------
 points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
 xs, ys = np.meshgrid(points, points)
 z = np.sqrt(xs ** 2 + ys ** 2)
