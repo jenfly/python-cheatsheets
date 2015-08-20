@@ -53,5 +53,32 @@ heading('pandas:  Statistics for tabular (spreadsheet-like) data')
 heading('xray:  N-D labeled datasets and netCDF I/O')
 
 
-filename = 'data/MERRA.201401.SUB.nc'
+#filename = 'data/MERRA.201401.SUB.nc'
+filename = 'data/eraI_1979_monthly.nc'
 dataset = xray.open_dataset(filename)
+
+# Unpack from xray object into numpy arrays
+lat = dataset['latitude'].values
+lon = dataset['longitude'].values
+level = dataset['level'].values
+u = dataset['u'].values
+v = dataset['v'].values
+temp = dataset['t'].values
+
+xi, yi = np.meshgrid(lon, lat)
+
+m, k = 1, -4 # Month 1, level 850 mb
+
+u1 = u[m, k, :, :]
+
+plt.figure()
+plt.pcolormesh(xi, yi, u1, cmap='jet')
+plt.colorbar()
+plt.axis([0, 360, -90, 90])
+
+plt.figure()
+m = Basemap()
+m.drawcoastlines()
+cmesh = m.pcolormesh(xi, yi, u1, cmap='jet', latlon=True)
+cb = m.colorbar(cmesh, location='right', size='5%', pad='2%')
+plt.draw() # Need this to make the colorbar visible

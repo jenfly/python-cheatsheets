@@ -6,6 +6,7 @@ matplotlib and basemap.
 - Histograms
 - Annotations
 - Bar charts
+- Scatter plots
 
 Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
@@ -62,6 +63,7 @@ plt.show()
 Other operations with figure windows:
 plt.figure()        # Creates a new figure window
 plt.get_fignums()   # Returns a list of all the figures currently open
+plt.redraw()        # Redraw current figure (in case changes weren't applied)
 plt.clf()           # Clears the current figure
 plt.cla()           # Clears the current axes
 plt.close(1)        # Closes figure 1
@@ -203,10 +205,61 @@ plt.legend()
 plt.tight_layout()
 
 # ----------------------------------------------------------------------
+# Scatter plots
+# ----------------------------------------------------------------------
+
+n = 1024
+x = np.random.normal(0,1,n)
+y = np.random.normal(0,1,n)
+angle = np.arctan2(y,x) # Angle from x-axis
+dist = np.sqrt(x**2 + y**2) # Distance from origin
+dist = dist * 20 # Scaling for plotting purposes
+axlim = [-3, 3, -3, 3]
+fnt = {'fontsize': 11}
+
+plt.figure(figsize=(7, 7))
+
+# Simple scatter plot using plot()
+# -- Points on the plot are all the same size and color
+plt.subplot(2,2,1)
+plt.plot(x, y, 'bo')
+plt.title('plot()', fnt)
+plt.axis(axlim)
+
+# Same thing using scatter() without any additional arguments
+plt.subplot(2,2,2)
+plt.scatter(x, y)
+plt.title('scatter()', fnt)
+plt.axis(axlim)
+
+'''
+Use the scatter() function to have size and/or color vary by point
+-- Optional keyword arguments include:
+    s = marker size (scalar or array)
+    c = marker color (scalar or array)
+    marker = marker style
+    alpha = transparency (0-1)
+'''
+
+# Scatter plot with marker size corresponding to distance from origin
+plt.subplot(2,2,3)
+plt.scatter(x, y, s=dist)
+plt.title('s=dist', fnt)
+plt.axis(axlim)
+
+# Marker size scales as distance from origin, and marker color scales as
+# angle from x-axis, with 50% transparency and jet colormap
+plt.subplot(2,2,4)
+plt.scatter(x, y, s=dist, c=angle, alpha=0.5, cmap='jet')
+plt.title('s=dist, c=angle,\nalpha=0.5, cmap=jet', fnt)
+plt.axis(axlim)
+
+# ----------------------------------------------------------------------
 points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
 xs, ys = np.meshgrid(points, points)
 z = np.sqrt(xs ** 2 + ys ** 2)
-print(z)
+
+plt.figure()
 plt.pcolormesh(xs, ys, z, cmap=plt.cm.gray)
 plt.colorbar()
 plt.title('$\sqrt{x^2 + y^2}$ for a grid of values')
@@ -227,64 +280,6 @@ plt.colorbar()
 plt.figure()
 plt.contourf(xi, yi, zi)
 plt.colorbar()
-
-# ----------------------------------------------------------------------
-# Example from matplotlib tutorial at
-# http://www.labri.fr/perso/nrougier/teaching/matplotlib/
-# Line plot with default formatting and customized formatting
-# Copyright (c) 2015, Nicolas P. Rougier. All Rights Reserved.
-
-X = np.linspace(-np.pi, np.pi, 256,endpoint=True)
-C,S = np.cos(X), np.sin(X)
-
-# Default formatting
-plt.figure()
-plt.plot(X,C)
-plt.plot(X,S)
-
-# Customized formatting
-plt.figure(figsize=(8,5), dpi=80)
-ax = plt.subplot(111)
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.xaxis.set_ticks_position('bottom')
-ax.spines['bottom'].set_position(('data',0))
-ax.yaxis.set_ticks_position('left')
-ax.spines['left'].set_position(('data',0))
-
-plt.plot(X, C, color="blue", linewidth=2.5, linestyle="-", label="cosine")
-plt.plot(X, S, color="red", linewidth=2.5, linestyle="-",  label="sine")
-
-plt.xlim(X.min()*1.1, X.max()*1.1)
-plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi],
-           [r'$-\pi$', r'$-\pi/2$', r'$0$', r'$+\pi/2$', r'$+\pi$'])
-
-plt.ylim(C.min()*1.1,C.max()*1.1)
-plt.yticks([-1, +1],
-           [r'$-1$', r'$+1$'])
-
-plt.legend(loc='upper left', frameon=False)
-
-t = 2*np.pi/3
-plt.plot([t,t],[0,np.cos(t)],
-         color ='blue',  linewidth=1.5, linestyle="--")
-plt.scatter([t,],[np.cos(t),], 50, color ='blue')
-plt.annotate(r'$\sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
-             xy=(t, np.sin(t)),  xycoords='data',
-             xytext=(+10, +30), textcoords='offset points', fontsize=16,
-             arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
-
-plt.plot([t,t],[0,np.sin(t)],
-         color ='red',  linewidth=1.5, linestyle="--")
-plt.scatter([t,],[np.sin(t),], 50, color ='red')
-plt.annotate(r'$\cos(\frac{2\pi}{3})=-\frac{1}{2}$',
-             xy=(t, np.cos(t)),  xycoords='data',
-             xytext=(-90, -50), textcoords='offset points', fontsize=16,
-             arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
-
-for label in ax.get_xticklabels() + ax.get_yticklabels():
-    label.set_fontsize(16)
-    label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.65 ))
 
 
 # ----------------------------------------------------------------------
