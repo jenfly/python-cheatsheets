@@ -8,6 +8,9 @@ matplotlib and basemap.
 - Bar charts
 - Scatter plots
 - Fill plots
+- Logarithmic axes
+- Reverse axis direction
+- Heat maps and contour plots
 
 Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
@@ -256,33 +259,6 @@ plt.title('s=dist, c=angle,\nalpha=0.5, cmap=jet', fnt)
 plt.axis(axlim)
 
 # ----------------------------------------------------------------------
-points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
-xs, ys = np.meshgrid(points, points)
-z = np.sqrt(xs ** 2 + ys ** 2)
-
-plt.figure()
-plt.pcolormesh(xs, ys, z, cmap=plt.cm.gray)
-plt.colorbar()
-plt.title('$\sqrt{x^2 + y^2}$ for a grid of values')
-
-# Create a new figure with jet colormap
-plt.figure()
-plt.pcolormesh(xs, ys, z, cmap=plt.cm.jet)
-plt.colorbar()
-
-# Playing around with pcolormesh and contourf
-x = np.arange(-5, 5)
-y = x
-xi, yi = np.meshgrid(x, y)
-zi = np.random.randn(10, 10)
-plt.figure()
-plt.pcolormesh(xi, yi, zi)
-plt.colorbar()
-plt.figure()
-plt.contourf(xi, yi, zi)
-plt.colorbar()
-
-# ----------------------------------------------------------------------
 # Fill plots
 # ----------------------------------------------------------------------
 
@@ -302,6 +278,94 @@ plt.plot(x, y, 'k')
 plt.fill_between(x, 0.2, y, y > 0.2,color='red', alpha=.25)
 plt.fill_between(x, y, -0.1, y < -0.1, color='blue', alpha=.25)
 plt.grid(True)
+
+# ----------------------------------------------------------------------
+# Logarithmic axes
+# ----------------------------------------------------------------------
+t = np.arange(0.01, 20.0, 0.01)
+
+plt.figure()
+plt.subplots_adjust(hspace=0.4)
+
+# log y axis
+plt.subplot(221)
+plt.semilogy(t, np.exp(-t/5.0))
+plt.title('semilogy')
+plt.grid(True)
+
+# log x axis
+plt.subplot(222)
+plt.semilogx(t, np.sin(2*np.pi*t))
+plt.title('semilogx')
+plt.grid(True)
+
+# log x and y axis
+plt.subplot(223)
+plt.loglog(t, 20*np.exp(-t/10.0), basex=2)
+plt.grid(True)
+plt.title('loglog base 4 on x')
+
+# with errorbars: clip non-positive values
+ax = plt.subplot(224)
+ax.set_xscale("log", nonposx='clip')
+ax.set_yscale("log", nonposy='clip')
+
+x = 10.0**np.linspace(0.0, 2.0, 20)
+y = x**2.0
+plt.errorbar(x, y, xerr=0.1*x, yerr=5.0+0.75*y)
+ax.set_ylim(ymin=0.1)
+ax.set_title('Errorbars go negative')
+
+# ----------------------------------------------------------------------
+# Reverse axis direction
+# ----------------------------------------------------------------------
+
+plt.figure()
+plt.plot(np.arange(10))
+plt.gca().invert_yaxis()
+
+# ----------------------------------------------------------------------
+# Heat maps and contour plots
+# ----------------------------------------------------------------------
+
+points = np.arange(-5, 5, 0.01)
+fnt = {'fontsize': 11}
+
+# Create a grid of points
+xs, ys = np.meshgrid(points, points)
+
+# Simple functions for plotting
+z = np.sqrt(xs ** 2 + ys ** 2)
+z2 = np.sqrt(((xs-2)/2)**2 + (ys-2)**2)
+plt.figure(figsize=(10,8))
+plt.suptitle('$\sqrt{x^2 + y^2}$ for a grid of values')
+
+# Heatmap with pcolormesh
+plt.subplot(221)
+plt.pcolormesh(xs, ys, z, cmap='jet')
+plt.colorbar()
+plt.axis([-5, 5, -5, 5])
+plt.title('pcolormesh', fnt)
+
+# Filled contour plot of the same data
+plt.subplot(222)
+plt.contourf(xs, ys, z, cmap='jet')
+plt.colorbar()
+plt.title('contourf with defaults', fnt)
+
+# Filled contour plot with specified number of levels
+plt.subplot(223)
+plt.contourf(xs, ys, z, 20, cmap='jet')
+plt.colorbar()
+plt.title('contourf with N=20', fnt)
+
+# Filled contour plot with specified contour levels
+plt.subplot(224)
+plt.contourf(xs, ys, z, np.arange(0.,9.,0.5), cmap='jet')
+plt.colorbar()
+# -- Add some contour lines
+plt.contour(xs,ys,z2,10,colors='black')
+plt.title('contourf with V=0,0.5,1,...8.5\n and z2 contour N=10', fnt)
 
 # ----------------------------------------------------------------------
 # basemap
