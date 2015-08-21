@@ -125,6 +125,18 @@ print(np.maximum(x, y)) # element-wise maximum
 arr = (np.random.randn(7) * 5).round(2)
 print(np.modf(arr)) # decimal and integer components of each element
 
+# Boolean logic with arrays
+x1 = np.linspace(0., 9., 10)
+x2 = np.arange(0., 10.)
+x3 = 10 * np.random.randn(10)
+
+# -- Comparisons
+comp = x1 == x3     # Array of True, False values for each element comparison
+
+# -- Check if two arrays are equal
+comp = np.array_equal(x1, x2) # True
+comp = np.array_equal(x1, x3) # False
+
 # ----------------------------------------------------------------------
 # Type conversions
 # ----------------------------------------------------------------------
@@ -348,6 +360,7 @@ print(quant5)
 # Uniqueness and set logic
 # ----------------------------------------------------------------------
 
+# Uniqueness
 names = np.array(['Bob', 'Joe', 'Will', 'Bob', 'Will', 'Joe', 'Joe'])
 print(np.unique(names)) # ndarray of unique names
 print(set(names)) # Python set object of unique names
@@ -355,6 +368,7 @@ print(sorted(np.unique(names))) # Sorted ndarray
 ints = np.array([3, 3, 3, 2, 2, 1, 1, 4, 4])
 print(np.unique(ints))
 
+# Some set logic
 values = np.array([6, 0, 0, 3, 2, 5, 6])
 in_val = np.in1d(values, [2, 3, 6]) # in_val[i]=True if values[i] is 2, 3 or 6
 
