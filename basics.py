@@ -47,12 +47,17 @@ heading('Variables and basic operations')
 print('''
 Create a variable by assigning it a value, e.g.,
 x = 10
-No need to declare it as a variable of a certain type.
-Python assigns it a type based on the value.
+No need to declare it as a variable of a certain type. Python assigns it a type
+based on the value.
 
-Avoid using the following variable names, which are
-equal to built-in functions and would override them:
+Avoid using the following variable names, which are equal to built-in functions
+and would override them:
 **** str, len, list, dict, map, filter ****
+
+To see the value of a variable, enter the variable name at the prompt in
+ipython, or use the print command:
+x
+print(x)
 
 Basic math operators: +, -, *, /, **, %, //
 Assignment operators: =, +=, -=, *=, /=, %=, **=, //=
