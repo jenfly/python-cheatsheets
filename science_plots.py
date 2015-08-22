@@ -397,6 +397,11 @@ plt.quiver(xi, yi, uplot, vplot)
 
 heading('basemap: Plotting geographic data')
 
+print('''\
+These examples use the Basemap class from the basemap package which was
+imported at the beginning of this module.
+''')
+
 # Super duper easy first map
 # Default projection is 'cyl' (Cylindrical Equidistant projection)
 plt.figure()
@@ -418,10 +423,13 @@ m.drawmapboundary(fill_color='aqua')
 m.fillcontinents(color='coral',lake_color='aqua')
 m.drawcoastlines()
 # Add a point at 30W, 20 N using m.plot()
-x, y = m(-30, 20)
-m.plot(x, y, marker='*', color='m')
+x, y = -30, 20
+m.plot(x, y, latlon=True, marker='*', color='b')
 # Add a bunch of points using m.scatter()
 lons = [0, 10, -20, -20]
 lats = [0, -10, 40, -20]
-x, y = m(lons, lats)
-m.scatter(x, y, marker='D',color='r')
+m.scatter(lons, lats, latlon=True, marker='D',color='b')
+# Add some lines with m.plot()
+lons = [-15, -150, -100]
+lats = [70, 30, 0]
+m.plot(lons, lats, latlon=True, color='m', linewidth=2)
