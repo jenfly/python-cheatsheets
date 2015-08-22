@@ -82,3 +82,19 @@ m.drawcoastlines()
 cmesh = m.pcolormesh(xi, yi, u1, cmap='jet', latlon=True)
 cb = m.colorbar(cmesh, location='right', size='5%', pad='2%')
 plt.draw() # Need this to make the colorbar visible
+
+'''
+Function to unpack xray dataset into individual numpy arrays
+'''
+
+# ----------------------------------------------------------------------
+# Geographic data
+# ----------------------------------------------------------------------
+
+'''
+Use Basemap class methods to
+m.interp() # Interpolation
+m.shiftdata() # Shifting longitude indexing
+
+Write some code for easy sub-sampling of data (e.g. for wind vector plots)
+'''
