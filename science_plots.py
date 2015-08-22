@@ -11,6 +11,8 @@ matplotlib and basemap.
 - Logarithmic axes
 - Reverse axis direction
 - Heat maps and contour plots
+- Quiver plots
+- Basemap
 
 Each section of this cheatsheet can be copy/pasted into ipython (using the
 %paste magic command for indented code) and run separately in an interactive
@@ -368,7 +370,29 @@ plt.contour(xs,ys,z2,10,colors='black')
 plt.title('contourf with V=0,0.5,1,...8.5\n and z2 contour N=10', fnt)
 
 # ----------------------------------------------------------------------
-# basemap
+# Quiver plots
+# ----------------------------------------------------------------------
+
+# Read a netCDF file into an xray dataset, and unpack into numpy arrays:
+with xray.open_dataset('data/ncep2_climatology.nc') as ds:
+    lat = ds['lat'].values
+    lon = ds['lon'].values
+    lev = ds['lev'].values
+    u = ds['u'].values
+    v = ds['v'].values
+
+# Extract 200mb winds and subsample so vectors aren't too crowded
+k = 9 # 200 mb vertical level
+nx, ny = 6, 3
+uplot, vplot = u[k,::ny,::nx], v[k,::ny,::nx]
+xi, yi = np.meshgrid(lon[::nx],lat[::ny])
+
+# Create quiver plot of wind vectors
+plt.figure()
+plt.quiver(xi, yi, uplot, vplot)
+
+# ----------------------------------------------------------------------
+# Basemap
 # ----------------------------------------------------------------------
 
 heading('basemap: Plotting geographic data')
