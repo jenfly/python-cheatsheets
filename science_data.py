@@ -9,9 +9,9 @@ session.
 Many of these code snippets are pilfered / adapted from:-
 - Xray user guide http://xray.readthedocs.org/en/stable/index.html
 
-This cheatsheet is part of a set: science_numpy.py, science_plots.py, and
-science_data.py, covering the following scientific computing modules, with
-a focus on atmospheric science applications:
+This cheatsheet is part of a set: science_numpy.py, science_plots.py,
+science_prettyplots, and science_data.py, covering the following scientific
+computing modules, with a focus on atmospheric science applications:
 - numpy:        Numerical python for N-D arrays, linear algebra, etc
 - matplotlib:   2-D plots and visualizations
 - basemap:      Plotting geographic data
