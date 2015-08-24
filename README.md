@@ -1,9 +1,11 @@
 # python-cheatsheets
 
-My collection of syntax and handy tips for scientific computing in Python.
+My collection of syntax and handy tips for scientific computing in Python.  These cheatsheets are geared towards atmospheric science applications are customized to my own needs and preferences, but some of them could be useful as a learning tool or reference to scientists in other fields.
+
 
 Module | Description
 ------- | --------- |
+WORKFLOW.md | Setup and configuration of development environment, workflow for new projects and daily operations
 basics.py | Basic syntax and data structures, control flow, functions, modules, using IPython shell
 science_numpy.py | Arrays and numerical analysis with numpy
 science_plots.py | Basic plots with matplotlib and geographic plots with basemap
