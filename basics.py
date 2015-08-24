@@ -626,33 +626,34 @@ filename = 'data/softkitty.txt'
 # as a simple '\n'.
 f = open(filename, 'rU')
 
-# Iterate over the lines of the file
-count = 0
-for line in f:
-    print(str(count) + ' ' + line)
-    count += 1
-
-# Close file
-f.close()
-
-# You can also read the entire contents of a file all at once into one
+# You can read the entire contents of a file all at once into one
 # giant string using .read()
-f = open(filename, 'rU')
 contents = f.read()
 f.close()
 print(contents)
 
+'''
+You can open and close a file with the commands above, but in general it is
+better practice to use a 'with .. as' statement instead.  This will close the
+file automatically after executing the commands listed after ':', and will
+make sure the file is closed properly even if an error has been raised.
+'''
+with open(filename, 'rU') as f:
+    # Iterate over the lines of the file
+    count = 0
+    for line in f:
+        print(str(count) + ' ' + line)
+        count += 1
 # ----------------------------------------------------------------------
 # Writing a file
 
 outfile = 'data/out.txt'
-f2 = open(outfile, 'w')
-f2.write('Curiously enough, the only thing that went through the mind of\n')
-f2.write('the bowl of petunias as it fell was "Oh no, not again". Many people\n')
-f2.write('have speculated that if we knew exactly why the bowl of petunias\n')
-f2.write('had thought that we would know a lot more about the nature of the\n')
-f2.write('Universe than we do now.')
-f2.close()
+with open(outfile, 'w') as f2:
+    f2.write('Curiously enough, the only thing that went through the mind of\n')
+    f2.write('the bowl of petunias as it fell was "Oh no, not again". Many\n')
+    f2.write('people have speculated that if we knew exactly why the bowl of\n')
+    f2.write('petunias had thought that we would know a lot more about the\n')
+    f2.write('nature of the Universe than we do now.')
 
 # -----------------------------------------------
 # Handy modules
