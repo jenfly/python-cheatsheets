@@ -72,7 +72,7 @@ plt.show()
 Other operations with figure windows:
 plt.figure()        # Creates a new figure window
 plt.get_fignums()   # Returns a list of all the figures currently open
-plt.redraw()        # Redraw current figure (in case changes weren't applied)
+plt.draw()          # Refresh current figure (in case changes weren't applied)
 plt.clf()           # Clears the current figure
 plt.cla()           # Clears the current axes
 plt.close(1)        # Closes figure 1
