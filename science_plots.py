@@ -77,6 +77,7 @@ plt.clf()           # Clears the current figure
 plt.cla()           # Clears the current axes
 plt.close(1)        # Closes figure 1
 plt.close('all')    # Closes all open figure windows
+plt.savefig('fig.eps') # Saves the figure in the current window to file
 ''')
 
 # ----------------------------------------------------------------------
