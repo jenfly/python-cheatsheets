@@ -40,6 +40,34 @@ heading('Data analysis with xray and pandas')
 # ----------------------------------------------------------------------
 
 # ----------------------------------------------------------------------
+# Overview
+# ----------------------------------------------------------------------
+
+heading('Overview')
+
+print('''
+Broad categories of data analysis tasks in Python
+(Python for Data Analysis, by Wes McKinney)
+
+- Interaction:      Interacting with outside world (file I/O)
+- Preparation:      Cleaning, munging, combining, normalizing, reshaping,
+                    slicing and dicing
+- Transformation:   Applying math and statistics operations to datasets
+                    or groups of datasets to derive new datasets
+                    (e.g. aggregating)
+- Modeling & computation:   Connecting your data to statistical models,
+                    machine learning algorithms, or other computational tools
+- Presentation:     Creating static or interactive graphical visualizations or
+                    textual summaries
+
+Terminology:
+Munge / munging / wrangling:  The process of manipulating unstructured and/or
+messy data into a structured or clean form.                    
+''')
+
+
+
+# ----------------------------------------------------------------------
 # pandas
 # ----------------------------------------------------------------------
 
