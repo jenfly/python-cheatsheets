@@ -378,7 +378,7 @@ plt.title('contourf with V=0,0.5,1,...8.5\n and z2 contour N=10', fnt)
 # ----------------------------------------------------------------------
 
 # Read a netCDF file into an xray dataset, and unpack into numpy arrays:
-with xray.open_dataset('data/ncep2_climatology.nc') as ds:
+with xray.open_dataset('data/ncep2_climatology_ann.nc') as ds:
     lat = ds['lat'].values
     lon = ds['lon'].values
     lev = ds['lev'].values
@@ -437,3 +437,30 @@ m.scatter(lons, lats, latlon=True, marker='D',color='b')
 lons = [-15, -150, -100]
 lats = [70, 30, 0]
 m.plot(lons, lats, latlon=True, color='m', linewidth=2)
+
+# ----------------------------------------------------------------------
+# Plot a lat-lon subset of the world map
+lon1, lon2 = 0, 120
+lat1, lat2 = -45, 45
+xi, yi = np.meshgrid(lon, lat)
+k = 9 # 200 mb vertical level
+
+plt.figure()
+m = Basemap(llcrnrlon=lon1, llcrnrlat=lat1, urcrnrlon=lon2, urcrnrlat=lat2)
+m.drawcoastlines()
+m.pcolormesh(xi, yi, u[k], cmap='jet')
+m.colorbar()
+
+# Add ticks
+ax = plt.gca()
+ax.set_xticks(np.arange(lon1, lon2, 15))
+ax.set_xticklabels([])
+ax.set_yticks(np.arange(lat1, lat2, 15))
+ax.set_yticklabels([])
+
+# Add nicely formatted ticklabels from basemap
+m.drawmeridians(np.arange(0,360,15), labels=[1,0,0,1], labelstyle='E/W',
+                linewidth=0.0)
+m.drawparallels(np.arange(-90,90,15), labels=[1,0,0,1], labelstyle='N/S',
+                linewidth=0.0)
+plt.draw()

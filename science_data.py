@@ -62,9 +62,8 @@ Broad categories of data analysis tasks in Python
 
 Terminology:
 Munge / munging / wrangling:  The process of manipulating unstructured and/or
-messy data into a structured or clean form.                    
+messy data into a structured or clean form.
 ''')
-
 
 
 # ----------------------------------------------------------------------
@@ -80,20 +79,38 @@ heading('pandas:  Statistics for tabular (spreadsheet-like) data')
 
 heading('xray:  N-D labeled datasets and netCDF I/O')
 
+filename = 'data/ncep2_climatology_ann.nc'
 
-#filename = 'data/MERRA.201401.SUB.nc'
-filename = 'data/eraI_1979_monthly.nc'
-dataset = xray.open_dataset(filename)
+with xray.open_dataset(filename) as ds:
+    # xray.open_dataset() does a lazy load of the file
+    # To fully load the contents into memory and make the dataset available
+    # after the file is closed, use the .load() method:
+    ds.load()
 
-# Unpack from xray object into numpy arrays
-lat = dataset['latitude'].values
-lon = dataset['longitude'].values
+print(ds)
+
+# Unpack some data from xray object into numpy arrays
+lat = ds['lat'].values
+lon = ds['lon'].values
+ps = ds['ps'].values/100 # Convert Pa to hPa
+
+xi, yi = np.meshgrid(lon, lat)
+
+plt.figure()
+m = Basemap(llcrnrlon=0, llcrnrlat=-90)
+m.drawcoastlines()
+m.pcolormesh(xi, yi, ps, cmap='jet', latlon=True)
+cb = m.colorbar(cmesh, location='right', size='5%', pad='2%')
+plt.draw() # Need this to make the colorbar visible
+
+
+
 level = dataset['level'].values
 u = dataset['u'].values
 v = dataset['v'].values
 temp = dataset['t'].values
 
-xi, yi = np.meshgrid(lon, lat)
+
 
 m, k = 1, -4 # Month 1, level 850 mb
 
