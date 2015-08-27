@@ -1,4 +1,5 @@
 out.txt
+out.nc
 *.npy
 data/more/*
 scratchpad.py

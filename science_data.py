@@ -79,6 +79,9 @@ heading('pandas:  Statistics for tabular (spreadsheet-like) data')
 
 heading('xray:  N-D labeled datasets and netCDF I/O')
 
+# ----------------------------------------------------------------------
+# Reading data from a netcdf file
+
 filename = 'data/ncep2_climatology_ann.nc'
 
 with xray.open_dataset(filename) as ds:
@@ -93,44 +96,44 @@ print(ds)
 lat = ds['lat'].values
 lon = ds['lon'].values
 ps = ds['ps'].values/100 # Convert Pa to hPa
-
 xi, yi = np.meshgrid(lon, lat)
 
-plt.figure()
-m = Basemap(llcrnrlon=0, llcrnrlat=-90)
-m.drawcoastlines()
-m.pcolormesh(xi, yi, ps, cmap='jet', latlon=True)
-cb = m.colorbar(cmesh, location='right', size='5%', pad='2%')
-plt.draw() # Need this to make the colorbar visible
-
-
-
-level = dataset['level'].values
-u = dataset['u'].values
-v = dataset['v'].values
-temp = dataset['t'].values
-
-
-
-m, k = 1, -4 # Month 1, level 850 mb
-
-u1 = u[m, k, :, :]
-
-plt.figure()
-plt.pcolormesh(xi, yi, u1, cmap='jet')
-plt.colorbar()
-plt.axis([0, 360, -90, 90])
-
+# Plot on basemap
 plt.figure()
 m = Basemap()
 m.drawcoastlines()
-cmesh = m.pcolormesh(xi, yi, u1, cmap='jet', latlon=True)
-cb = m.colorbar(cmesh, location='right', size='5%', pad='2%')
-plt.draw() # Need this to make the colorbar visible
+m.pcolormesh(xi, yi, ps, cmap='jet', latlon=True)
+m.colorbar()
+plt.draw()
 
-'''
-Function to unpack xray dataset into individual numpy arrays
-'''
+# ----------------------------------------------------------------------
+# Create a new dataset and save to netcdf file
+
+ds2 = xray.Dataset()
+ds2.attrs['title'] = 'My Dataset'
+ds2.attrs['source'] = 'Grumpy Cat'
+ds2['ps'] = (('lat', 'lon'), ps)
+ds2.coords['lat'] = ('lat', lat)
+ds2.coords['lon'] = ('lon', lon)
+print(ds2)
+
+# Save to netcdf
+outfile = 'data/out.nc'
+ds2.to_netcdf(outfile, mode='w')
+
+# ----------------------------------------------------------------------
+# Reading OPenDAP data files
+
+remote_file = 'http://iridl.ldeo.columbia.edu/SOURCES/.OSU/.PRISM/.monthly/dods'
+
+with xray.open_dataset(remote_file, decode_times=False) as remote_ds:
+    print(remote_ds)
+
+Tmax = remote_ds['tmax']
+lat = remote_ds['Y']
+lon = remote_ds['X']
+
+
 
 # ----------------------------------------------------------------------
 # Geographic data
