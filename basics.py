@@ -1,5 +1,7 @@
-'''
+"""
 Jennifer's cheatsheet for Python basic syntax and handy tips.
+
+Contents:
 - Variables and basic operations
 - Strings
 - Console input
@@ -16,9 +18,9 @@ Jennifer's cheatsheet for Python basic syntax and handy tips.
 - Editor configuration
 - Conventions and best practices
 
-Each section of this cheatsheet can be copy/pasted into ipython (using the
-%paste magic command for indented code) and run separately in an interactive
-session.
+Each section of this cheatsheet can be copy/pasted into ipython (using
+the %paste magic command for indented code) and run separately in an
+interactive session.
 
 Many of these code snippets are pilfered / adapted from:
 - Google's Python Class
@@ -29,12 +31,12 @@ Many of these code snippets are pilfered / adapted from:
 A triple-quoted comment at the beginning of a module (.py file)
 or function is automatically used as the documentation
 string.
-'''
+"""
 
 print("\nWelcome to Jennifer's Python basics cheatsheet!")
 
 def heading(s):
-    '''Prints a nice heading to the console.'''
+    """Print a nice heading to the console."""
     line = '-' * 40
     print('\n' + line + '\n' + s + '\n' + line)
 
@@ -42,20 +44,20 @@ def heading(s):
 # Variables and basic operations
 # ----------------------------------------------
 
-heading('Variables and basic operations')
+heading("Variables and basic operations")
 
-print('''
+print("""
 Create a variable by assigning it a value, e.g.,
 x = 10
-No need to declare it as a variable of a certain type. Python assigns it a type
-based on the value.
+No need to declare it as a variable of a certain type. Python assigns
+it a type based on the value.
 
-Avoid using the following variable names, which are equal to built-in functions
-and would override them:
+Avoid using the following variable names, which are equal to built-in
+functions and would override them:
 **** str, len, list, dict, map, filter ****
 
-To see the value of a variable, enter the variable name at the prompt in
-ipython, or use the print command:
+To see the value of a variable, enter the variable name at the prompt
+in ipython, or use the print command:
 x
 print(x)
 
@@ -64,25 +66,25 @@ Assignment operators: =, +=, -=, *=, /=, %=, **=, //=
 Booleans:  True, False
 Comparators: ==, !=, <, <=, >, >=
 Boolean operators: and, or, not
-''')
+""")
 
 # Basic math operators
 x = 72 + 23
 x = 108 - 204
 x = 108 * 0.5
 x = 108 / 9
-x = 2 ** 3 # Exponentiation
-x = 4 % 3 # Modulus
-x = 6 // 5 # Integer (floor) division
+x = 2 ** 3      # Exponentiation
+x = 4 % 3       # Modulus
+x = 6 // 5      # Integer (floor) division
 
 # Assignment operators
 x1 = 10
-x1 += 2 # Same as x1 = x1 + 2
-x1 -= 5 # Same as x1 = x1 - 5
-x1 *= 5 # Same as x1 = x1 * 2
-x1 /= 7 # Same as x1 = x1 / 7
-x1 %= 3 # Same as x1 = x1 % 3
-x1 /= 4 # Same as x1 = x1 // 4
+x1 += 2     # Same as x1 = x1 + 2
+x1 -= 5     # Same as x1 = x1 - 5
+x1 *= 5     # Same as x1 = x1 * 2
+x1 /= 7     # Same as x1 = x1 / 7
+x1 %= 3     # Same as x1 = x1 % 3
+x1 /= 4     # Same as x1 = x1 // 4
 
 # Booleans and comparators
 bool1 = True
@@ -97,14 +99,14 @@ bool1 = x1 > x2
 bool1 = x1 >= x2
 
 # Boolean operators
-bool1 = (2 <= 2) and "Alpha" == "Bravo"
+bool1 = (2 <= 2) and 'Alpha' == 'Bravo'
 bool1 = (1<2) or (2<1)
 bool1 = not (10>100)
 
 # Type
-print type(43) # int
-print type(1.2) # float
-print type('cat') # string
+print type(43)      # int
+print type(1.2)     # float
+print type('cat')   # string
 
 # ----------------------------------------------
 # Strings
@@ -122,8 +124,8 @@ str3 = 'Ford, you\'re turning into a penguin.  Stop it!'
 # Multi-line strings
 # --- With parentheses:
 #     Doesn't include newlines unless added with \n
-long1 = ("I can't keep track of her when she's *not* incorporeally possessing "
-         "a space ship; don't look at me.")
+long1 = ("I can't keep track of her when she's *not* incorporeally possessing"
+         " a space ship; don't look at me.")
 # --- With triple quotation marks:
 #     Use \ at end of line to exclude new line
 long2 = """\
@@ -137,52 +139,53 @@ print(long1)
 print(long2)
 
 # String methods
-lunch = "Time is an illusion.  Lunchtime doubly so."
+lunch = 'Time is an illusion.  Lunchtime doubly so.'
 print(len(lunch))
 print(lunch.lower())
 print(lunch.upper())
 pi = 3.14159
-print(str(pi)) # Convert to string
-s = str1 + " " + str2 # Concatenation
+print(str(pi))              # Convert to string
+s = str1 + ' ' + str2       # Concatenation
 print(s)
-s_exclaim = s.replace('.','!') # Replace substring
+s_exclaim = s.replace('.','!')  # Replace substring
 print(s_exclaim)
-s_rep = 'kittens! ' * 3 # Repeats the string 'kittens! ' 3 times
+s_rep = 'kittens! ' * 3     # Repeats the string 'kittens! '' 3 times
 print(s_rep)
 
 # Indexing and slicing strings
-'''
-Indices start at 0 and count up, or from the end of the
-string at -1 and count down.
+# ----------------------------
+# Indices start at 0 and count up, or from the end of the
+# string at -1 and count down.
+#
+# Slicing: Extracting a range of indices (e.g., 1:4)
+# The slice n1:n2 is *inclusive* of n1 and *exclusive* of n2,
+# i.e. 1:4 gives elements 1,2,3.
+#
+# There is no separate character type.  A character is a string
+# of size 1.
 
-Slicing: Extracting a range of indices (e.g., 1:4)
-The slice n1:n2 is *inclusive* of n1 and *exclusive* of n2,
-i.e. 1:4 gives elements 1,2,3.
-
-There is no separate character type.  A character is a string
-of size 1.
-'''
 s = 'Hello' # Indices: [0, 1, 2, 3, 4], and [-5, -4, -3, -2, -1]
-print(s[0]) # 'H'
-print(s[1:4]) # 'ell'
-print(s[1:]) # 'ello'
-print(s[-1]) # 'o'
-print(s[:-3]) # 'He'
-print(s[-3:]) # 'llo'
+print(s[0])     # 'H'
+print(s[1:4])   # 'ell'
+print(s[1:])    # 'ello'
+print(s[-1])    # 'o'
+print(s[:-3])   # 'He'
+print(s[-3:])   # 'llo'
 # Note: s[:n] + s[n:] is always equal to s
 
 # Immutability
-'''Strings are immutable in Python, i.e., you can't change individual
-elements (you can only create a new string)'''
+# ------------
+# Strings are immutable in Python, i.e., you can't change individual
+# elements (you can only create a new string)
 s = 'Cats'
-print(s[0]) # 'C'
-#s[0] = 'B' # Raises error
-s = 'Bats' # Works
+print(s[0])     # 'C'
+#s[0] = 'B'     # Raises error
+s = 'Bats'      # Works
 
 # Formatting strings
 s1 = 'Cats'
 s2 = 'world'
-s3 = ("%s rule the %s.  Pi is %.2f to 2 digits." % (s1, s2, pi))
+s3 = ('%s rule the %s.  Pi is %.2f to 2 digits.' % (s1, s2, pi))
 print(s3)
 
 # ----------------------------------------------
@@ -192,10 +195,8 @@ print(s3)
 heading('User input from console')
 print('Use raw_input(prompt)')
 
-'''
-name = raw_input('What is your name? ')
-print('Hello %s!' %(name))
-'''
+# name = raw_input('What is your name? ')
+# print('Hello %s!' %(name))
 
 # ----------------------------------------------
 # Lists
@@ -203,7 +204,7 @@ print('Hello %s!' %(name))
 
 heading('Lists')
 
-print('''
+print("""
 A list is a sequence of comma-separated values between [ ]
 Lists and strings are both sequences, i.e. indexed by a range of integers
 Lists usually homogeneous (e.g. [1, 4, 9, 20], ['cat', 'dog', 'hamster'])
@@ -211,34 +212,35 @@ Lists are mutable, so you can change individual elements
 
 List methods: append, extend, insert, remove, pop, index,
 count, sort, reverse
-''')
+""")
 
 # List assignment and operations
 squares = [1, 4, 10, 16, 25]
-print(squares[-3:]) # Slicing
-squares[3] = 9 # Change individual elements
-squares.append(36) # Append
-squares.extend([49, 64]) # Extend
-a = [-10, 3, 2] + [100, 200] # Concatenate
+print(squares[-3:])             # Slicing
+squares[3] = 9                  # Change individual elements
+squares.append(36)              # Append
+squares.extend([49, 64])        # Extend
+a = [-10, 3, 2] + [100, 200]    # Concatenate
 print(len(a)) # Length
 
 # Membership testing
-'''The "in" statement returns True if an element is in a list,
-False if not.  And vice versa for "not in" statement '''
+# ------------------
+# The "in" statement returns True if an element is in a list,
+# False if not.  And vice versa for "not in" statement
 firefly = ['Mal', 'Wash', 'Zoe', 'Jayne', 'Kaylee', 'Inara', 'Simon',
     'River', 'Book']
-test1 = 'Kaylee' in firefly # True
-test2 = 'Sheldon' in firefly # False
-test3 = 'Sheldon' not in firefly # True
+test1 = 'Kaylee' in firefly         # True
+test2 = 'Sheldon' in firefly        # False
+test3 = 'Sheldon' not in firefly    # True
 
 # Deleting
 # --- Use the del command to delete individual elements,
 #     slices, empty the contents, or delete the list object
 a = [-1, 1, 66.25, 333, 333, 1234.5]
-del a[0] # Now a is [1, 66.25, 333, 333, 1234.5]
-del a[2:4] # Now a is [1, 66.25, 1234.5]
-del a[:] # Now a is []
-del a # Now a no longer exists
+del a[0]    # Now a is [1, 66.25, 333, 333, 1234.5]
+del a[2:4]  # Now a is [1, 66.25, 1234.5]
+del a[:]    # Now a is []
+del a       # Now a no longer exists
 
 # Defining numeric lists
 x1 = range(5) # 0, 1, 2, 3, 4
@@ -246,22 +248,21 @@ x2 = range(0, 5) # 0, 1, 2, 3, 4
 x3 = range(0,10,2) # 0, 2, 4, 6, 8
 
 # Sets
-'''A set is an unordered collection with no duplicate elements'''
+# ----
+# A set is an unordered collection with no duplicate elements
 basket = ['apple', 'orange', 'apple', 'pear', 'orange', 'banana']
 fruit = set(basket)
 print(basket)
 print(fruit)
 
 # Zip function for iterating over multiple lists
-'''
-zip will create pairs of elements when passed two lists, and will stop
-at the end of the shorter list. zip can handle three or more lists as well.
-'''
+# -----------------------------------------------
+# zip will create pairs of elements when passed two lists, and will stop
+# at the end of the shorter list. zip can handle three or more lists as well.
 list_a = [3, 1, 17, 15, 19]
 list_b = [2, 4, 8, 10, 30, 40, 50, 60, 70, 80, 90]
 
 for a, b in zip(list_a, list_b):
-    # Add your code here!
     if a > b: print a
     else: print b
 
@@ -271,7 +272,7 @@ for a, b in zip(list_a, list_b):
 
 heading('Tuples')
 
-print('''
+print("""
 A tuple is a sequence of comma-separated values between ( )
 Tuples are usually heterogeneous (e.g. ('kitten', 2, False) )
 Tuples are immutable, so you cannot change individual elements
@@ -279,7 +280,7 @@ Tuples can be used to return multiple values from a function
 
 () can be ommited when assigning tuples, but must be included
 when returning a tuple from a function
-''')
+""")
 
 # Tuple packing
 t = 10, -12.34, 'hello'
@@ -362,12 +363,12 @@ while a < n:
     a, b = b, a+b
 print(series)
 
-''' Additional control flow statements:
-break - Breaks out of smallest enclosing for or while loop
-continue - Continues with next iteration of loop
-pass - Does nothing.  Use when syntax requires a statement but
-       no action is needed.
-'''
+# Additional control flow statements:
+#   break - Breaks out of smallest enclosing for or while loop
+#   continue - Continues with next iteration of loop
+#   pass - Does nothing.  Use when syntax requires a statement but
+#          no action is needed.
+
 
 # ----------------------------------------------
 # Functions
@@ -377,21 +378,22 @@ heading('Functions')
 
 # Defining functions
 def shouting(s):
-    '''
-    Shouts a string in upper case with exclamation points!
+    """
+    Shout a string in upper case with exclamation points!
 
     A triple-quoted comment at the beginning of the function
     (if present) is automatically used as the docstring.
     Convention: First line of docstring is a concise summary
     of the function.  If including additional lines, separate
     them from the first line with a blank second line.
-    '''
+    Convention: Use double quote marks rather than single quote marks
+    """
     print("We're shouting!")
     return s.replace('.','!').upper() + '!!!'
 
 print(shouting('Soft kitty. Warm kitty. Little ball of fur.'))
 
-print('''
+print("""
 Indentation is Python's way of grouping elements.  An indented
 line is not the same as a non-indented line, and the level of
 indentation affects how the code is interpreted.  Recommended
@@ -403,7 +405,7 @@ shouting? # Displays docstring and some other info
 shouting?? # Displays source code, if feasible
 help(shouting) # Displays detailed documentation
 dir(shouting) # Displays list of attributes
-''')
+""")
 
 # Default argument values and keyword arguments
 def my_pets(ncat, ndog=0, nhamster=0):
@@ -413,31 +415,29 @@ my_pets(2)
 my_pets(2, 1)
 my_pets(2, nhamster=3)
 
-'''
-Notes:
-Keyword arguments must follow positional arguments in a function call.
-
-A function without a return expression returns None.
-a = my_pets(2) # a is None
-
-Use tuples to return multiple outputs, e.g. return (x, y, z)
-'''
+# Notes:
+# Keyword arguments must follow positional arguments in a function call.
+#
+# A function without a return expression returns None.
+# a = my_pets(2) # a is None
+#
+# Use tuples to return multiple outputs, e.g. return (x, y, z)
 
 # Maps
-print('''\nMaps:
+print("""\nMaps:
 map(function, sequence) calls function(item) for each item in
-sequence and returns a list of the return values.''')
+sequence and returns a list of the return values.""")
 
 def cube(x): return x**3
 print(map(cube, range(1,11)))
 
 # Filters
-print('''\nFilters:
+print("""\nFilters:
 filter(function, sequence) returns a list of items in sequence
 for which function(item) is True
-''')
+""")
 def f(x):
-    '''Divisible by 3 or 5'''
+    """Divisible by 3 or 5"""
     return x % 3 == 0 or x % 5 == 0
 print(filter(f, range(2, 25)))
 
@@ -447,21 +447,21 @@ print(filter(f, range(2, 25)))
 
 heading('Dictionaries')
 
-print('''
+print("""
 Dictionaries are a data structure indexed by keys, rather than
 integers (as lists and strings are indexed).
 A dictionary is an unordered set of key:value pairs, enclosed
 within { }, with the requirement that keys are unique within a
 given dictionary.
-''')
+""")
 
 # Assigning a dictionary
 # --- Assign a list of key:value pairs
 greek = { 'a': 'alpha', 'b': 'beta', 'g': 'gamma'}
 print(greek['a'])
-greek['d'] = 'delta' # Add a key:value pair
-print(greek) # Prints keys
-print(greek.keys()) # Same as above
+greek['d'] = 'delta'    # Add a key:value pair
+print(greek)            # Prints keys
+print(greek.keys())     # Same as above
 #-- Or start with an empty dictionary, then add key:value pairs
 suitcase = {}
 suitcase['shirts'] = 5
@@ -469,8 +469,8 @@ suitcase['pants'] = 3
 
 # Membership testing
 print('a' in greek) # True
-if 'z' in greek: print greek['z'] # No 'z' key so doesn't print
-print(greek.get('z')) # None
+if 'z' in greek: print greek['z']   # No 'z' key so doesn't print
+print(greek.get('z'))               # None
 
 # Looping over keys in a dictionary
 # --- Two equivalent methods:
@@ -499,7 +499,7 @@ for key in sorted(inventory.keys()):
 
 heading('Modules, namespaces and scripts')
 
-print('''\
+print("""\
 Modules:
 - A python module is a .py file containing definitions and executable
   statements
@@ -538,25 +538,25 @@ python zoo.py
 import zoo
 --> This runs all the code in zoo.py and stores its variables, functions,
     and classes in an object called 'zoo'.
-''')
+""")
 
-'''
-More on modules
----------------
 
-Suppose I have a module named zoo.py containing the following:
+# More on modules
+# ---------------
+#
+# Suppose I have a module named zoo.py containing the following:
+#
+# ------- zoo.py -----------------------------------------
+# def visit(animals, name):
+#     print('Welcome to the zoo, ' + name + '! We have: ')
+#     for key in animals:
+#         print('  %d %s' % (animals[key], key))
+#
+# animals = {'zebras': 5, 'elephants': 4, 'penguins': 10}
+# name = 'Jennifer'
+# visit(animals, name)
+# ---------------------------------------------------------
 
-------- zoo.py -----------------------------------------
-def visit(animals, name):
-    print('Welcome to the zoo, ' + name + '! We have: ')
-    for key in animals:
-        print('  %d %s' % (animals[key], key))
-
-animals = {'zebras': 5, 'elephants': 4, 'penguins': 10}
-name = 'Jennifer'
-visit(animals, name)
----------------------------------------------------------
-'''
 # Within an ipython interactive session:
 
 # Import the module
@@ -575,40 +575,40 @@ myvisit(myanimals, 'Jackson')
 import zoo as myzoo # Rename the module object
 from zoo import visit # Import only the visit function from zoo
 
-'''
-Now suppose I edited zoo.py to add the opening hours to the end of the
-greeting message in the visit function:
-print('Our opening hours are Mon-Sun 8:00am - 8:00pm')
 
-If I run zoo.py as a script in ipython, all the changes will be
-implemented and the opening hours will be printed.
+# Now suppose I edited zoo.py to add the opening hours to the end of the
+# greeting message in the visit function:
+# print('Our opening hours are Mon-Sun 8:00am - 8:00pm')
+#
+# If I run zoo.py as a script in ipython, all the changes will be
+# implemented and the opening hours will be printed.
+#
+# But if I have imported zoo.py as a module, the edits to the source file
+# will not be implemented in my ipython session.  If I try importing again
+# with 'import zoo', this just returns a reference to the previously loaded
+# module and the changes are still not propagated through.
+#
+# To propagate changes in a module, run the command:
+# reload(zoo)
+#
+# However, any dependencies (modules imported in zoo.py and their nested
+# imports) do not reload!  The command dreload(zoo) attempts a deep reload of
+# all dependencies, but doesn't always work.  So if you have a lot of imports
+# nested in modules, in order to propagate through source code edits you can
+# a) Exit ipython and start a new session, or
+# b) Use the %reset magic command to clear the ipython interactive namespace
+#
+# If a script expects command line arguments, these can be passed to the script
+# after the file path in the %run command as though on the command line:
+# %run myscript.py 10
+#
+# To access command line arguments, import the sys module with import sys and
+# use sys.argv.
+#
+# For a list of all the objects defined in the current ipython namespace,
+# use the command:
+# dir()
 
-But if I have imported zoo.py as a module, the edits to the source file
-will not be implemented in my ipython session.  If I try importing again
-with 'import zoo', this just returns a reference to the previously loaded
-module and the changes are still not propagated through.
-
-To propagate changes in a module, run the command:
-reload(zoo)
-
-However, any dependencies (modules imported in zoo.py and their nested imports)
-do not reload!  The command dreload(zoo) attempts a deep reload of all
-dependencies, but doesn't always work.  So if you have a lot of imports
-nested in modules, in order to propagate through source code edits you can
-a) Exit ipython and start a new session, or
-b) Use the %reset magic command to clear the ipython interactive namespace
-
-If a script expects command line arguments, these can be passed to the script
-after the file path in the %run command as though on the command line:
-%run myscript.py 10
-
-To access command line arguments, import the sys module with import sys and
-use sys.argv.
-
-For a list of all the objects defined in the current ipython namespace,
-use the command:
-dir()
-'''
 
 # ----------------------------------------------
 # Text file I/O
@@ -632,12 +632,11 @@ contents = f.read()
 f.close()
 print(contents)
 
-'''
-You can open and close a file with the commands above, but in general it is
-better practice to use a 'with .. as' statement instead.  This will close the
-file automatically after executing the commands listed after ':', and will
-make sure the file is closed properly even if an error has been raised.
-'''
+# You can open and close a file with the commands above, but in general it is
+# better practice to use a 'with .. as' statement instead.  This will close the
+# file automatically after executing the commands listed after ':', and will
+# make sure the file is closed properly even if an error has been raised.
+
 with open(filename, 'rU') as f:
     # Iterate over the lines of the file
     count = 0
@@ -705,7 +704,7 @@ for w in sortlist:
 
 heading('IPython features')
 
-print('''\
+print("""\
 Keyboard shortcuts
 ------------------
 Up/Down keys --> Back/forward in command history
@@ -759,7 +758,7 @@ Notebooks
 ---------
 From command line, launch ipython with:
 ipython notebook
-''')
+""")
 
 # ----------------------------------------------
 # Editor configuration
@@ -767,13 +766,13 @@ ipython notebook
 
 heading('Editor configuration')
 
-print('''\
+print("""\
 My preferred text editor configuration (e.g. with Atom editor):
 - Syntax highlighting
 - Parentheses matching
 - Tab = 4 spaces (make sure no actual Tab characters are used!)
 - Auto-indent on
-''')
+""")
 
 # ----------------------------------------------
 # Conventions and best practices
@@ -781,34 +780,33 @@ My preferred text editor configuration (e.g. with Atom editor):
 
 heading('Conventions and best practices')
 
-'''Note: some of these are not followed in this .py file because its
-purpose is to mimic an interactive ipython session and easily copy/paste code
-snippets.'''
+# Note: some of these are not followed in this .py file because its
+# purpose is to mimic an interactive ipython session and easily copy/paste code
+# snippets.
 
-print('''
-Follow PEP 0008 -- Style Guide for Python, from the Python Developer's Guide
-for consistent, readable code.
-''')
+print("""
+Follow PEP 0008 (Style Guide for Python) and PEP 0257 (Docstring Conventions)
+from the Python Developer's Guide for consistent, readable code.
+""")
 
-'''
-Naming Conventions
-- CamelCase for classes
-- lower_case_with_underscores for everything else
-- Avoid built-in names such as str, len, list
-
-Best Practices:
-- Import statements at start of .py file
-- Single line comments on their own line
-- Maximum line width of 80 characters (for readability without text wrapping)
-- First line of docstring is a concise summary of the function.  If including
-  additional lines, separate them from the first line with a blank second line.
-'''
+# Naming Conventions
+# - CamelCase for classes
+# - lower_case_with_underscores for everything else
+# - Avoid built-in names such as str, len, list
+#
+# Best Practices:
+# - Import statements at start of .py file
+# - Single line comments on their own line
+# - Maximum line width of 80 characters (for readability without text wrapping)
+# - First line of docstring is a concise summary of the function.  If including
+#   additional lines, separate them from the first line with a blank second line.
+#
 
 # Zen of Python
 # PEP 20 by Tim Peters, from the Python Developer's Guide
 # https://www.python.org/dev/peps/pep-0020/
 # Displays on the python console with the command 'import this'
-print('''\
+print("""\
 The Zen of Python
 
     Beautiful is better than ugly.
@@ -830,4 +828,4 @@ The Zen of Python
     If the implementation is hard to explain, it's a bad idea.
     If the implementation is easy to explain, it may be a good idea.
     Namespaces are one honking great idea -- let's do more of those!
-''')
+""")

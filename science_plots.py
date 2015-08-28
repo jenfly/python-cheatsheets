@@ -1,6 +1,7 @@
-'''
-Jennifer's cheatsheet for scientific computing with Python - plotting with
-matplotlib and basemap.
+"""
+Jennifer's scientific computing cheatsheet - matplotlib and basemap.
+
+Contents:
 - matplotlib basics
 - Subplots
 - Histograms
@@ -17,9 +18,10 @@ matplotlib and basemap.
 This cheatsheet covers the basic commands to create plots.  See
 science_prettyplots.py for fancy formatting commands.
 
-Each section of this cheatsheet can be copy/pasted into ipython (using the
-%paste magic command for indented code) and run separately in an interactive
-session.
+Each section of this cheatsheet can be copy/pasted into ipython (using
+the %paste magic command for indented code) and run separately in an
+interactive session.
+
 
 Many of these code snippets are pilfered / adapted from:
 - Matplotlib documentation
@@ -30,14 +32,15 @@ Many of these code snippets are pilfered / adapted from:
   https://basemaptutorial.readthedocs.org/en/latest/index.html
 
 This cheatsheet is part of a set: science_numpy.py, science_plots.py,
-science_prettyplots, and science_data.py, covering the following scientific
-computing modules, with a focus on atmospheric science applications:
+science_prettyplots, and science_data.py, covering the following
+scientific computing modules, with a focus on atmospheric science
+applications:
 - numpy:        Numerical python for N-D arrays, linear algebra, etc
 - matplotlib:   2-D plots and visualizations
 - basemap:      Plotting geographic data
 - pandas:       Statistics for tabular (spreadsheet-like data)
 - xray:         N-D labeled datasets and netCDF I/O
-'''
+"""
 
 # Naming conventions for importing standard scientific modules:
 import numpy as np
@@ -51,7 +54,7 @@ import xray
 print("\nWelcome to Jennifer's cheatsheet for scientific computing in Python!")
 
 def heading(s):
-    '''Prints a nice heading to the console.'''
+    """Print a nice heading to the console."""
     line = '-' *60
     print('\n' + line + '\n' + s + '\n' + line)
 
@@ -64,7 +67,7 @@ heading('Plotting with matploblib and basemap')
 
 heading('matplotlib:  2-D plots and visualizations')
 
-print('''\
+print("""\
 When running a script in ipython, the figures usually aren't visible when
 the script completes.  To show them:
 plt.show()
@@ -78,7 +81,7 @@ plt.cla()           # Clears the current axes
 plt.close(1)        # Closes figure 1
 plt.close('all')    # Closes all open figure windows
 plt.savefig('fig.eps') # Saves the figure in the current window to file
-''')
+""")
 
 # ----------------------------------------------------------------------
 # Simple plot using format strings such as 'r-'
@@ -126,10 +129,9 @@ x1 = np.linspace(0.0, 5.0)
 x2 = np.linspace(0.0, 2.0)
 y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
 y2 = np.cos(2 * np.pi * x2)
-plt.figure()
 
-# plt.subplot(numrows, numcols, numfig)
-plt.subplot(2, 1, 1)
+plt.figure()
+plt.subplot(2, 1, 1)    # plt.subplot(numrows, numcols, numfig)
 plt.plot(x1, y1, 'yo-')
 plt.title('A tale of 2 subplots')
 plt.ylabel('Damped oscillation')
@@ -143,6 +145,7 @@ plt.ylabel('Undamped')
 
 # To tighten up the space between and around subplots, use tight_layout()
 plt.tight_layout()
+
 # ----------------------------------------------------------------------
 # Histogram
 # ----------------------------------------------------------------------
@@ -221,9 +224,9 @@ plt.tight_layout()
 n = 1024
 x = np.random.normal(0,1,n)
 y = np.random.normal(0,1,n)
-angle = np.arctan2(y,x) # Angle from x-axis
-dist = np.sqrt(x**2 + y**2) # Distance from origin
-dist = dist * 20 # Scaling for plotting purposes
+angle = np.arctan2(y,x)         # Angle from x-axis
+dist = np.sqrt(x**2 + y**2)     # Distance from origin
+dist = dist * 20                # Scaling for plotting purposes
 axlim = [-3, 3, -3, 3]
 fnt = {'fontsize': 11}
 
@@ -242,14 +245,12 @@ plt.scatter(x, y)
 plt.title('scatter()', fnt)
 plt.axis(axlim)
 
-'''
-Use the scatter() function to have size and/or color vary by point
--- Optional keyword arguments include:
-    s = marker size (scalar or array)
-    c = marker color (scalar or array)
-    marker = marker style
-    alpha = transparency (0-1)
-'''
+# Use the scatter() function to have size and/or color vary by point
+# -- Optional keyword arguments include:
+#     s = marker size (scalar or array)
+#     c = marker color (scalar or array)
+#     marker = marker style
+#     alpha = transparency (0-1)
 
 # Scatter plot with marker size corresponding to distance from origin
 plt.subplot(2,2,3)
@@ -386,7 +387,7 @@ with xray.open_dataset('data/ncep2_climatology_ann.nc') as ds:
     v = ds['v'].values
 
 # Extract 200mb winds and subsample so vectors aren't too crowded
-k = 9 # 200 mb vertical level
+k = 9   # 200 mb vertical level
 nx, ny = 6, 3
 uplot, vplot = u[k,::ny,::nx], v[k,::ny,::nx]
 xi, yi = np.meshgrid(lon[::nx],lat[::ny])
@@ -401,10 +402,10 @@ plt.quiver(xi, yi, uplot, vplot)
 
 heading('basemap: Plotting geographic data')
 
-print('''\
+print("""\
 These examples use the Basemap class from the basemap package which was
 imported at the beginning of this module.
-''')
+""")
 
 # Super duper easy first map
 # Default projection is 'cyl' (Cylindrical Equidistant projection)
@@ -443,7 +444,7 @@ m.plot(lons, lats, latlon=True, color='m', linewidth=2)
 lon1, lon2 = 0, 120
 lat1, lat2 = -45, 45
 xi, yi = np.meshgrid(lon, lat)
-k = 9 # 200 mb vertical level
+k = 9   # 200 mb vertical level
 
 plt.figure()
 m = Basemap(llcrnrlon=lon1, llcrnrlat=lat1, urcrnrlon=lon2, urcrnrlat=lat2)
