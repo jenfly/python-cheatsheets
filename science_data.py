@@ -128,12 +128,14 @@ remote_file = 'http://iridl.ldeo.columbia.edu/SOURCES/.OSU/.PRISM/.monthly/dods'
 
 with xray.open_dataset(remote_file, decode_times=False) as remote_ds:
     print(remote_ds)
+    # Load a subset of max temperature data
+    Tmax = remote_ds['tmax'][0, ::3, ::3].load()
 
-Tmax = remote_ds['tmax']
-lat = remote_ds['Y']
-lon = remote_ds['X']
-
-
+print(Tmax)
+plt.figure(figsize=(9,5))
+plt.gca().patch.set_color('0')
+plt.contourf(Tmax['X'], Tmax['Y'], Tmax.values, 20, cmap='RdBu_r')
+plt.colorbar(label='Tmax (deg C)')
 
 # ----------------------------------------------------------------------
 # Geographic data
