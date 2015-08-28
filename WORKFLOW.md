@@ -140,7 +140,7 @@ window.
 * Test code in the IPython shell.  Two options:
   1. Run the whole script in IPython using `%run foo.py`, or
   2. Copy code snippets from editor and use `%paste` or `%cpaste` to paste
-  and run indented code snippets IPython
+  and run indented code snippets in IPython
 * Use Git to commit changes to source code and other project files on at least
 a daily basis
 * For nice README files, save as .md (Markdown Here format).  Use
