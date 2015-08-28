@@ -1,6 +1,6 @@
 # python-cheatsheets
 
-My collection of syntax and handy tips for scientific computing in Python.  These cheatsheets are geared towards atmospheric science applications are customized to my own needs and preferences, but some of them could be useful as a learning tool or reference to scientists in other fields.
+My collection of syntax and handy tips for scientific computing in Python.  These cheatsheets are geared towards atmospheric science applications and are customized to my own needs and preferences, but some of them could be useful as a learning tool or reference for scientists in other fields.
 
 
 Module | Description
