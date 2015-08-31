@@ -36,6 +36,11 @@ conda update ipython ipython-notebook ipython-qtconsole
 conda install basemap netcdf4 xray bottleneck pep8 bokeh sphinx sphinx_rtd_theme
 ```
 
+Add the pep8 checker to the aliases in my `~/.bashrc` file:
+```
+alias pep8='~/anaconda/bin/pep8'
+```
+
 -----------
 #### Atom Text Editor
 
@@ -144,6 +149,8 @@ window.
 a daily basis
 * For nice README files, save as .md (Markdown Here format).  Use
 `Ctrl-Shift-m` to open/close Markdown Here preview window in Atom.
+* To check my code against the PEP8 style guide, run `pep8 foo.py` from 
+  the command line
 
 #### Git / GitHub operations
 
