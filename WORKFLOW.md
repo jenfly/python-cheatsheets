@@ -32,9 +32,8 @@ conda update ipython ipython-notebook ipython-qtconsole
 ```
 
 ##### Install additional libraries
-Add the basemap, netCDF and xray (plus bottleneck) packages:
 ```
-conda install basemap netcdf4 xray bottleneck
+conda install basemap netcdf4 xray bottleneck pep8 bokeh sphinx sphinx_rtd_theme
 ```
 
 -----------
