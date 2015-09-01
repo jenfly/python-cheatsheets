@@ -47,10 +47,10 @@ def docstrings(x, n, spam=True, eggs='green', title=None):
     Return a recipe for breakfast.
     
     This nonsense function provides a template for docstring style
-    conventions. To see the template, call style.docstrings?.    
+    conventions. To see the template, call `style.docstrings?`.    
 
     The first line of a docstring should be a concise summary,
-    describing what the function does as an action, e.g.
+    describing what the function does as an action, e.g.,
     - Return the square of a number.
     - Find the unique elements of an array.
     - Load a dataset from a netCDF file.
@@ -61,7 +61,7 @@ def docstrings(x, n, spam=True, eggs='green', title=None):
 
     For the listing of function arguments, I use the following style:
 
-    argname : Variable type or list of acceptable values[, optional]
+    argname : variable type or list of acceptable values[, optional]
         Desription of the argument.
 
 
