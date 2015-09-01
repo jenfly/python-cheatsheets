@@ -21,11 +21,13 @@ PEP8 Highlights
        other than 4 space indent)
 """)
 
+
 # Continuation lines
 # -- Option a)
 def my_long_function_name(long_variable_one='hello', long_variable_two=True,
                           long_variable_three=123):
     print('Hello world!')
+
 
 # -- Option b)
 def another_long_function(
@@ -33,6 +35,7 @@ def another_long_function(
         long_variable_three=123):
     if long_variable_two:
         print('Kittens!')
+
 
 foo = another_long_function(
     long_variable_one='world', long_variable_two=False,
@@ -45,9 +48,9 @@ foo = another_long_function(
 def docstrings(x, n, spam=True, eggs='green', title=None):
     """
     Return a recipe for breakfast.
-    
+
     This nonsense function provides a template for docstring style
-    conventions. To see the template, call `style.docstrings?`.    
+    conventions. To see the template, call `style.docstrings?`.
 
     The first line of a docstring should be a concise summary,
     describing what the function does as an action, e.g.,
