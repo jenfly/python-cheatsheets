@@ -36,12 +36,6 @@ conda update ipython ipython-notebook ipython-qtconsole
 conda install basemap netcdf4 xray bottleneck pep8 bokeh sphinx sphinx_rtd_theme
 ```
 
-Install the Pydap package for OpenDAP access:
-```
-conda install pip
-pip install Pydap
-```
-
 
 Add the pep8 checker to the aliases in my `~/.bashrc` file:
 ```
