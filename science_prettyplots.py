@@ -54,6 +54,25 @@ heading('Making plots pretty')
 # Formatting examples
 # ----------------------------------------------------------------------
 
+# Setting global defaults
+plt.rc('figure', figsize=(6,5))
+font_options = {'family' : 'monospace',
+                'weight' : 'bold',
+                'size' : 9.0}
+plt.rc('font', **font_options)
+
+# matplotlib/mpl-data/matplotlibrc -- customize and save as
+# ~/.matplotlibrc to load customized defaults each time you use matplotlib
+
+# Sharing x, y axes, adjusting spacing between subplots
+fig, axes = plt.subplots(2, 2, sharex=True, sharey=True)
+for i in range(2):
+    for j in range(2):
+        axes[i,j].hist(np.random.randn(500), bins=50, color='k', alpha=0.5)
+plt.subplots_adjust(wspace=0, hspace=0)
+
+
+# pd.scatter_matrix() example from pydata-book
 
 # ----------------------------------------------------------------------
 # Styles
