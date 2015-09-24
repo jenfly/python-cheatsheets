@@ -16,6 +16,10 @@ Many of these code snippets are pilfered / adapted from:
 - http://www.tutorialspoint.com/python/python_classes_objects.htm
 """
 
+# Make float division the default for / operator, even when the
+# operands are both integers
+from __future__ import division
+
 import math
 
 print("\nWelcome to Jennifer's advanced Python cheatsheet!")

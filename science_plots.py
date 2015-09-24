@@ -42,6 +42,10 @@ applications:
 - xray:         N-D labeled datasets and netCDF I/O
 """
 
+# Make float division the default for / operator, even when the
+# operands are both integers
+from __future__ import division
+
 # Naming conventions for importing standard scientific modules:
 import numpy as np
 import matplotlib.pyplot as plt
