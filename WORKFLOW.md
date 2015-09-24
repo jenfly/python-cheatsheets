@@ -33,7 +33,7 @@ conda update ipython ipython-notebook ipython-qtconsole
 
 ##### Install additional libraries
 ```
-conda install basemap netcdf4 xray dask bottleneck pep8 bokeh sphinx sphinx_rtd_theme
+conda install basemap netcdf4 xray dask bottleneck pep8 nltk bokeh sphinx sphinx_rtd_theme
 ```
 
 
@@ -150,7 +150,7 @@ window.
 a daily basis
 * For nice README files, save as .md (Markdown Here format).  Use
 `Ctrl-Shift-m` to open/close Markdown Here preview window in Atom.
-* To check my code against the PEP8 style guide, run `pep8 foo.py` from 
+* To check my code against the PEP8 style guide, run `pep8 foo.py` from
   the command line
 
 #### Git / GitHub operations

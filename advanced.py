@@ -23,6 +23,7 @@ from __future__ import division
 
 import math
 import collections
+import nltk
 
 print("\nWelcome to Jennifer's advanced Python cheatsheet!")
 
@@ -114,8 +115,12 @@ filename = 'data/softkitty.txt'
 with open(filename, 'rU') as f:
     contents = f.read()
 
-# Split into a list of words
-contents = contents.split()
+# Split into a list of words using the natural language toolkit
+# This splits out punctuation, which contents.split() does not do.
+contents = nltk.word_tokenize(contents)
+
+# If nltk is not installed, then use:
+# contents = contents.split()
 
 # A defaultdict from the collections module creates a dict where a new key:value
 # pair is initialized with a default value when assigning to a key that
@@ -131,10 +136,10 @@ for word in contents:
 word_counts2 = collections.Counter(contents)
 print(word_counts2)
 print('Most common:')
-for word, count in word_counts2.most_common(3):
+for word, count in word_counts2.most_common(5):
     print(word, count)
 
-    
+
 # ----------------------------------------------------------------------
 # Fancier file I/O
 # ----------------------------------------------------------------------
