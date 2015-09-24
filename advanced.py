@@ -4,6 +4,7 @@ Jennifer's cheatsheet for advanced Python topics.
 Contents:
 - Classes
 - Collections module
+- Argument unpacking
 - Errors and exceptions
 - Fancier file I/O
 - sys module
@@ -139,6 +140,28 @@ print('Most common:')
 for word, count in word_counts2.most_common(5):
     print(word, count)
 
+
+# ----------------------------------------------------------------------
+# Argument unpacking
+# ----------------------------------------------------------------------
+
+def magic(*args, **kwargs):
+    # args is a tuple of unnamed arguments.
+    # kwargs is a dict of named arguments
+    print('Unnamed args', args)
+    print('Keyword args', kwargs)
+
+magic(1, 2, key='word', key2='word2')
+
+def other_way_magic(x, y, z):
+    print('x', x)
+    print('y', y)
+    print('z', z)
+    return x + y + z
+
+x_y_list = [1, 2]
+z_dict = {'z' : 3}
+print(other_way_magic(*x_y_list, **z_dict))
 
 # ----------------------------------------------------------------------
 # Fancier file I/O
