@@ -3,6 +3,7 @@ Jennifer's cheatsheet for advanced Python topics.
 
 Contents:
 - Classes
+- Collections module
 - Errors and exceptions
 - Fancier file I/O
 - sys module
@@ -21,6 +22,7 @@ Many of these code snippets are pilfered / adapted from:
 from __future__ import division
 
 import math
+import collections
 
 print("\nWelcome to Jennifer's advanced Python cheatsheet!")
 
@@ -103,6 +105,36 @@ def vdistance(v1, v2):
 print(vdistance(v1, v2))
 
 
+# ----------------------------------------------------------------------
+# Collections module
+# ----------------------------------------------------------------------
+
+filename = 'data/softkitty.txt'
+
+with open(filename, 'rU') as f:
+    contents = f.read()
+
+# Split into a list of words
+contents = contents.split()
+
+# A defaultdict from the collections module creates a dict where a new key:value
+# pair is initialized with a default value when assigning to a key that
+# doesn't exist
+word_counts = collections.defaultdict(int)
+
+for word in contents:
+    word_counts[word] += 1
+
+# A Counter object from the collections module creates a dict with the keys
+# as the unique elements in a list, and the values the number of times the
+# element occurs in the list
+word_counts2 = collections.Counter(contents)
+print(word_counts2)
+print('Most common:')
+for word, count in word_counts2.most_common(3):
+    print(word, count)
+
+    
 # ----------------------------------------------------------------------
 # Fancier file I/O
 # ----------------------------------------------------------------------
