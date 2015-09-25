@@ -229,6 +229,25 @@ git whatchanged     # List of commits with more details
 git whatchanged --since="2 weeks ago"   # Change history last 2 weeks
 git config --list # Check your config settings
 ```
+
+#### Adding to the Python search path
+
+In `~/.bashrc` (home computers):
+```
+export PYTHONPATH=${PYTHONPATH}:/home/jennifer/dynamics/python/atmos-tools/
+```
+
+In `~/.cshrc` (school computer):
+```
+setenv PYTHONPATH ${PYTHONPATH}:/home/jwalker/dynamics/python/atmos-tools/
+```
+
+Within Python shell:
+```
+import sys
+sys.path.append(dirpath)
+```
+
 ----------------
 ### 5. Development Approach
 
