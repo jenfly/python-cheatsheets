@@ -6,7 +6,7 @@ the %paste magic command for indented code) and run separately in an
 interactive session.
 
 Many of these code snippets are pilfered / adapted from:-
-- Xray user guide http://xray.readthedocs.org/en/stable/index.html
+- xray user guide http://xray.readthedocs.org/en/stable/index.html
 
 This cheatsheet is part of a set: science_numpy.py, science_plots.py,
 science_prettyplots, and science_data.py, covering the following
@@ -76,6 +76,7 @@ messy data into a structured or clean form.
 
 heading('pandas:  Statistics for tabular (spreadsheet-like) data')
 
+print('Coming soon!')
 
 # ----------------------------------------------------------------------
 # xray
@@ -99,6 +100,7 @@ print(ds)
 # Unpack some data from xray object into numpy arrays
 lat = ds['lat'].values
 lon = ds['lon'].values
+lev = ds['lev'].values
 ps = ds['ps'].values/100 # Convert Pa to hPa
 xi, yi = np.meshgrid(lon, lat)
 
@@ -109,6 +111,44 @@ m.drawcoastlines()
 m.pcolormesh(xi, yi, ps, cmap='jet', latlon=True)
 m.colorbar()
 plt.draw()
+
+# Let's put this all in a function to show how xray DataArrays
+# make life easier
+def plotmap(data, cmap='jet', latname='lat', lonname='lon'):
+    lat, lon = ds[latname], ds[lonname]
+    xi, yi = np.meshgrid(lon, lat)
+
+    # Plot on basemap
+    plt.figure()
+    m = Basemap()
+    m.drawcoastlines()
+    m.pcolormesh(xi, yi, data, cmap=cmap, latlon=True)
+    m.colorbar()
+    plt.draw()
+
+# We can extract one vertical level from all the variables in the
+# dataset with one command:
+k = 2 # 850 mb
+ds850 = ds.isel(lev=k)
+print(ds850)
+
+# We can work with a bunch of data variables without needing
+# separate variables to store all their coordinates.  In this simple
+# example the variables below all have the same grid, so it doesn't
+# really matter, but this feature comes in very handy when you have
+# multiple datasets or output from models at different resolutions.
+u = ds850['u']
+v = ds850['v']
+T = ds850['T']
+plotmap(u, cmap='RdBu_r')
+plotmap(v, cmap='RdBu_r')
+plotmap(T)
+
+# Calculate the mean along a named dimension (don't need to know which
+# axis it is in the array)
+ubar = u.mean(dim='lon')
+plt.figure()
+plt.plot(ubar.lat, ubar)
 
 # ----------------------------------------------------------------------
 # Create a new dataset and save to netcdf file
@@ -140,14 +180,3 @@ plt.figure(figsize=(9,5))
 plt.gca().patch.set_color('0')
 plt.contourf(Tmax['X'], Tmax['Y'], Tmax.values, 20, cmap='RdBu_r')
 plt.colorbar(label='Tmax (deg C)')
-
-# ----------------------------------------------------------------------
-# Geographic data
-# ----------------------------------------------------------------------
-
-
-# Use Basemap class methods to
-# m.interp() # Interpolation
-# m.shiftdata() # Shifting longitude indexing
-#
-# Write some code for easy sub-sampling of data (e.g. for wind vector plots)
