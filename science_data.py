@@ -89,36 +89,68 @@ heading('xray:  N-D labeled datasets and netCDF I/O')
 
 filename = 'data/ncep2_climatology_ann.nc'
 
+# Open a netCDF file
+ds = xray.open_dataset(filename) 
+
+# ds is an xray.Dataset object containing all the variables and metadata
+# from the netCDF file
+print(ds)
+
+# List of data variables in the dataset:
+print(ds.data_vars)
+
+# List of coordinates in the dataset:
+print(ds.coords)
+
+# List of dataset attributes:
+print(ds.attrs)
+
+# Get one of the data variables:
+ps = ds['ps'] 
+
+# ps is an xray.DataArray object, including coordinates and other metadata:
+print(ps)
+print('Coordinates:')
+print(ps.coords)
+print('Dimensions:')
+print(ps.dims)
+print('Attributes:')
+print(ps.attrs)
+
+# Close the file when done with it
+ds.close() 
+
+# The command ds = xray.open_dataset() does a lazy load of the file, so data 
+# is loaded into memory only as needed and is only available as long as the 
+# file is open.
+
+# After ds.close(), we can no longer access the contents of ds or ps
+# If we wanted our variable ps to be available after the file is closed,
+# we would use ps = ds['ps'].load() to load it into memory.
+
+# To make sure that files get properly closed out even if there is an error,
+# it's better to use a context manager `with ... as :`
 with xray.open_dataset(filename) as ds:
-    # xray.open_dataset() does a lazy load of the file
-    # To fully load the contents into memory and make the dataset available
-    # after the file is closed, use the .load() method:
+    # Here we extract whatever data we need and use .load() if we want to use
+    # it later outside of the context manager.
+    # This is a small dataset so we'll load the entire contents into memory:
     ds.load()
 
 print(ds)
 
-# Unpack some data from xray object into numpy arrays
+# We can unpack data from an xray object into numpy arrays with .values:
 lat = ds['lat'].values
 lon = ds['lon'].values
 lev = ds['lev'].values
-ps = ds['ps'].values/100 # Convert Pa to hPa
-xi, yi = np.meshgrid(lon, lat)
+ps_vals = ds['ps'].values
 
-# Plot on basemap
-plt.figure()
-m = Basemap()
-m.drawcoastlines()
-m.pcolormesh(xi, yi, ps, cmap='jet', latlon=True)
-m.colorbar()
-plt.draw()
+def plotmap(data, lat=None, lon=None, cmap='jet'):
+    # If data is a DataArray, we can omit the lat, lon arrays and extract
+    # from the DataArray's coordinates
+    if isinstance(data, xray.DataArray):
+        lat, lon = data['lat'], data['lon']
 
-# Let's put this all in a function to show how xray DataArrays
-# make life easier
-def plotmap(data, cmap='jet', latname='lat', lonname='lon'):
-    lat, lon = ds[latname], ds[lonname]
     xi, yi = np.meshgrid(lon, lat)
-
-    # Plot on basemap
     plt.figure()
     m = Basemap()
     m.drawcoastlines()
@@ -126,32 +158,44 @@ def plotmap(data, cmap='jet', latname='lat', lonname='lon'):
     m.colorbar()
     plt.draw()
 
-# We can extract one vertical level from all the variables in the
-# dataset with one command:
-k = 2 # 850 mb
-ds850 = ds.isel(lev=k)
-print(ds850)
+# Plot the data from numpy arrays
+plotmap(ps_vals/100, lat, lon)
 
-# We can work with a bunch of data variables without needing
-# separate variables to store all their coordinates.  In this simple
-# example the variables below all have the same grid, so it doesn't
-# really matter, but this feature comes in very handy when you have
-# multiple datasets or output from models at different resolutions.
-u = ds850['u']
-v = ds850['v']
-T = ds850['T']
-plotmap(u, cmap='RdBu_r')
-plotmap(v, cmap='RdBu_r')
-plotmap(T)
+# Plot the data from DataArray
+plotmap(ds['ps']/100)
+
+# With DataArrays, we can work with a bunch of data variables without needing
+# separate variables to store all their coordinates.  In this simple example 
+# the variables below all have the same grid, so it doesn't really matter, but 
+# this feature comes in very handy when you have multiple datasets or output 
+# from models at different resolutions.
+u = ds['u']
+v = ds['v']
+T = ds['T']
+k = 2       # 850 mb
+print(u[k]) # DataArray with 850 mb data
+plotmap(u[k], cmap='RdBu_r')
+plotmap(v[k], cmap='RdBu_r')
+plotmap(T[k])
 
 # Calculate the mean along a named dimension (don't need to know which
 # axis it is in the array)
-ubar = u.mean(dim='lon')
+ubar = u[k].mean(dim='lon')
 plt.figure()
 plt.plot(ubar.lat, ubar)
 
+# We can also apply operations to all the data variables in a dataset with
+# one command, and using named dimensions.
+print('Zonal mean')
+dsbar = ds.mean(dim='lon')
+print(dsbar)
+print('Boom!')
+ubar2 = dsbar['u'][k]
+plt.figure()
+plt.plot(ubar2.lat, ubar2)
+
 # ----------------------------------------------------------------------
-# Create a new dataset and save to netcdf file
+# Create a new dataset object and save to netcdf file
 
 ds2 = xray.Dataset()
 ds2.attrs['title'] = 'My Dataset'
