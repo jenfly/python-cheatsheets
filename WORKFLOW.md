@@ -153,6 +153,46 @@ a daily basis
 * To check my code against the PEP8 style guide, run `pep8 foo.py` from
   the command line
 
+#### Python packages and search path
+
+##### Adding Python packages
+
+Use the Anaconda package manager to add a package `newpkg`:
+```
+conda install newpkg
+```
+
+If `newpkg` isn't found in the Anaconda package list, use `pip` to add it.
+`pip` is already included in Anaconda.
+```
+pip install newpkg
+```
+
+##### Adding to the Python search path
+
+If I've been working on a module `/home/jwalker/fuzzy/kittens.py` and want
+to import it from another directory in a Python script or module, I can add 
+the directory to the Python search path on the fly within Python/IPython:
+```
+import sys
+sys.path.append('/home/jwalker/fuzzy')
+import kittens
+```
+
+Or I can modify my `.bashrc` or `.cshrc` so that this directory is automatically
+added to the Python search path.
+
+* In `~/.bashrc` (home computers):
+```
+export PYTHONPATH=${PYTHONPATH}:/home/jennifer/dynamics/python/atmos-tools/
+```
+
+* In `~/.cshrc` (school computer):
+```
+setenv PYTHONPATH ${PYTHONPATH}:/home/jwalker/dynamics/python/atmos-tools/
+```
+
+
 #### Git / GitHub operations
 
 ##### Commit frequency
@@ -228,24 +268,6 @@ git log     # List of commits
 git whatchanged     # List of commits with more details
 git whatchanged --since="2 weeks ago"   # Change history last 2 weeks
 git config --list # Check your config settings
-```
-
-#### Adding to the Python search path
-
-In `~/.bashrc` (home computers):
-```
-export PYTHONPATH=${PYTHONPATH}:/home/jennifer/dynamics/python/atmos-tools/
-```
-
-In `~/.cshrc` (school computer):
-```
-setenv PYTHONPATH ${PYTHONPATH}:/home/jwalker/dynamics/python/atmos-tools/
-```
-
-Within Python shell:
-```
-import sys
-sys.path.append(dirpath)
 ```
 
 ----------------
