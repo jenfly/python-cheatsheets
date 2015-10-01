@@ -184,12 +184,12 @@ added to the Python search path.
 
 * In `~/.bashrc` (home computers):
 ```
-export PYTHONPATH=${PYTHONPATH}:/home/jennifer/dynamics/python/atmos-tools/
+export PYTHONPATH=${PYTHONPATH}:/home/jwalker/fuzzy/
 ```
 
 * In `~/.cshrc` (school computer):
 ```
-setenv PYTHONPATH ${PYTHONPATH}:/home/jwalker/dynamics/python/atmos-tools/
+setenv PYTHONPATH ${PYTHONPATH}:/home/jwalker/fuzzy/
 ```
 
 
