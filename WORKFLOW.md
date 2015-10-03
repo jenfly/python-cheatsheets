@@ -259,6 +259,15 @@ local version:
 git pull origin master
 ```
 
+##### Reverting to a previous version
+
+Generate a new commit that undoes all of the changes introduced in <commit>, 
+then apply it to the current branch:
+```
+git revert <commit>
+```
+
+
 ##### Handy commands
 
 ```
@@ -268,6 +277,7 @@ git log     # List of commits
 git whatchanged     # List of commits with more details
 git whatchanged --since="2 weeks ago"   # Change history last 2 weeks
 git config --list # Check your config settings
+git revert HEAD   # Revert the last commit
 ```
 
 ----------------
