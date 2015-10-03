@@ -171,7 +171,7 @@ pip install newpkg
 ##### Adding to the Python search path
 
 If I've been working on a module `/home/jwalker/fuzzy/kittens.py` and want
-to import it from another directory in a Python script or module, I can add 
+to import it from another directory in a Python script or module, I can add
 the directory to the Python search path on the fly within Python/IPython:
 ```
 import sys
@@ -261,7 +261,7 @@ git pull origin master
 
 ##### Reverting to a previous version
 
-Generate a new commit that undoes all of the changes introduced in <commit>, 
+Generate a new commit that undoes all of the changes introduced in a commit,
 then apply it to the current branch:
 ```
 git revert <commit>
