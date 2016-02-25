@@ -33,7 +33,8 @@ conda update ipython ipython-notebook ipython-qtconsole
 
 ##### Install additional libraries
 ```
-conda install basemap netcdf4 xray dask bottleneck pep8 nltk bokeh sphinx sphinx_rtd_theme
+conda install basemap netcdf4 xarray dask bottleneck pep8 nltk bokeh sphinx sphinx_rtd_theme proj4
+pip install cartopy
 ```
 
 
