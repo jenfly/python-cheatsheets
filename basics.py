@@ -263,8 +263,10 @@ list_a = [3, 1, 17, 15, 19]
 list_b = [2, 4, 8, 10, 30, 40, 50, 60, 70, 80, 90]
 
 for a, b in zip(list_a, list_b):
-    if a > b: print a
-    else: print b
+    if a > b: 
+        print a
+    else: 
+        print b
 
 # ----------------------------------------------
 # Tuples
@@ -317,11 +319,14 @@ if 'curly' in mylist:
 # Any list of non-zero length tests as True
 # 0, None and [] test as False
 x = 10
-if x: print('Yes')
+if x: 
+    print('Yes')
 x = []
-if x: print('Yes')
+if x:
+    print('Yes')
 x = [0, 0, 0]
-if x: print('Yes')
+if x:
+    print('Yes')
 
 # For loops
 # ---------
@@ -330,7 +335,7 @@ animals = ["hamster", "rabbit", "cat", "gerbil"]
 
 print("--- Loop over items:")
 for item in animals:
-	print("Hello " + item)
+    print("Hello " + item)
 
 print("--- Loop over indices:")
 for i in range(len(animals)):
@@ -428,7 +433,9 @@ print("""\nMaps:
 map(function, sequence) calls function(item) for each item in
 sequence and returns a list of the return values.""")
 
-def cube(x): return x**3
+def cube(x): 
+    return x**3
+    
 print(map(cube, range(1,11)))
 
 # Filters
@@ -469,13 +476,16 @@ suitcase['pants'] = 3
 
 # Membership testing
 print('a' in greek) # True
-if 'z' in greek: print greek['z']   # No 'z' key so doesn't print
+if 'z' in greek: 
+    print greek['z']   # No 'z' key so doesn't print
 print(greek.get('z'))               # None
 
 # Looping over keys in a dictionary
 # --- Two equivalent methods:
-for key in greek: print key
-for key in greek.keys(): print key
+for key in greek: 
+    print key
+for key in greek.keys(): 
+    print key
 
 # Dictionary operations
 inventory = {
