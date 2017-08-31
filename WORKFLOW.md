@@ -193,6 +193,88 @@ export PYTHONPATH=${PYTHONPATH}:/home/jwalker/fuzzy/
 setenv PYTHONPATH ${PYTHONPATH}:/home/jwalker/fuzzy/
 ```
 
+#### Virtual environments
+
+##### My workflow
+
+* In the project folder, create an `env_init.yml` file with the minimum
+specifications for the environment (e.g. environment name, Python version,
+list of packages, specific package versions)
+* Create the environment with `conda env create -f env_init.yml`
+* Save the full details of the environment to an `environment.yml` file with
+`conda env export -n myenv > environment.yml` where `myenv` is the environment
+name
+* Whenever working on the project, first activate the environment with `source
+activate myenv`
+* Whenever adding or updating a package in the environment, update
+`environment.yml` by exporting the environment
+
+
+##### Command reference
+
+To see a list of my conda environments, use `conda env list` or
+`conda info --envs`.  The active environment is highlighted with an asterisk.
+By default, the active environment is shown in ( ) before the command prompt:
+`(myenv) $`.
+
+
+To activate / deactivate an environment:
+```
+source activate myenv   # Activate myenv
+source deactivate       # Deactivate the current environment
+```
+
+To see a list of all packages installed in a specific environment:
+```
+conda list -n myenv     # If the environment is not activated
+conda list              # If the environment is activated
+```
+
+To see if a specific package is installed in an environment:
+```
+conda list -n myenv scipy
+```
+
+To remove an environment:
+```
+conda remove -n myenv --all
+```
+
+Creating an environment:
+```
+conda create -n myenv           # Uses same Python version as currently in use
+conda create -n myenv python=3.4    # Specify Python version
+conda create -n myenv scipy         # Include a specific package       
+conda install -n myenv scipy        # Install package in existing environment
+conda create -n myenv scipy=0.15.0  # Specific version of a package
+conda create -n myenv python=3.4 scipy=0.15.0 astroid babel # Multiple packages
+conda create -n myclone --clone myenv    # Clone an environment
+```
+
+Creating an environment from an `environment.yml` file:
+```
+conda env create -f environment.yml
+```
+Example `environment.yml` file:
+```
+name: myenv
+dependencies:
+- python=3
+- ipython
+- numpy
+- pip
+- pip:
+    - pydap==3.2.2
+```
+Note that versions are specified with a single `=` for conda packages and a
+double `==` for pip packages.
+
+Exporting the environment file:
+```
+source activate myenv
+conda env export > environment.yml  # Note: overwrites existing environment.yml
+```
+
 
 #### Git / GitHub operations
 
