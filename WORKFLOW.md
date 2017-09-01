@@ -85,6 +85,12 @@ so that figure windows work properly, so I add to my aliases in my
 ```
 alias ipython='ipython --matplotlib'
 ```
+
+Or on Windows, I modify the default IPython profile by setting
+`c.InteractiveShellApp.matplotlib = 'auto'` in `ipython_config.py` (located in
+ `~/.ipython/profile_default`).  If the file does not already exist, create
+ the default profile with `ipython profile create`.
+
 ##### Automatic logging of sessions
 Set up auto-logging TBD
 
@@ -205,7 +211,7 @@ list of packages, specific package versions)
 `conda env export -n myenv > environment.yml` where `myenv` is the environment
 name
 * Whenever working on the project, first activate the environment with `source
-activate myenv`
+activate myenv` (or `activate myenv` on Windows)
 * Whenever adding or updating a package in the environment, update
 `environment.yml` by exporting the environment
 
@@ -223,6 +229,7 @@ To activate / deactivate an environment:
 source activate myenv   # Activate myenv
 source deactivate       # Deactivate the current environment
 ```
+On Windows, use `activate myenv` and `deactivate`.
 
 To see a list of all packages installed in a specific environment:
 ```
