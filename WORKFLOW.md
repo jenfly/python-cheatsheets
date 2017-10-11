@@ -175,6 +175,15 @@ If `newpkg` isn't found in the Anaconda package list, use `pip` to add it.
 pip install newpkg
 ```
 
+Installing a package in editable (development) mode:
+```
+pip install -e <url_or_path>
+```
+Or within the project directory,
+```
+python setup.py develop
+```
+
 ##### Adding to the Python search path
 
 If I've been working on a module `/home/jwalker/fuzzy/kittens.py` and want
